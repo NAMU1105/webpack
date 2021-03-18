@@ -1,29 +1,38 @@
 // webpack.config.js
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const port = process.env.PORT || 3000;
+const path = require("path");
 
 module.exports = {
+  // production, development, none 3가지의 옵션이 존재
   // 개발환경
   mode: "development",
   // 애플리케이션 진입점
-  entry: "./src/index.js",
+  entry: "./src/index.tsx",
+  // entry: {
+  //   kb: ["babel-polyfill", "./src/index.tsx"],
+  // },
   // 번들된 파일을 저장할 경로
+  // 기본값은 ./dist/main.js
   output: {
     filename: "bundle.[hash].js",
   },
+  devtool: "source-map",
+
   resolve: {
-    extensions: [".js", ".jsx"],
+    extensions: [".js", ".jsx", ".ts", ".tsx"],
   },
   // loader 설정
   module: {
     rules: [
       {
         // es6 바벨 관련 loader
-        test: /\.(js|jsx)$/,
+        test: /\.(js|jsx|ts|tsx)$/,
         exclude: /node_modules/,
         use: {
           loader: "babel-loader",
         },
+        exclude: /node_modules/,
       },
       {
         // html loader
