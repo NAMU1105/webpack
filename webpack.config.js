@@ -2,11 +2,15 @@
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const port = process.env.PORT || 3000;
 const path = require("path");
+const prod = process.env.NODE_ENV === "production";
+const webpack = require("webpack");
 
 module.exports = {
   // production, development, none 3가지의 옵션이 존재
   // 개발환경
-  mode: "development",
+  // mode: "development",
+  mode: prod ? "production" : "development",
+  devtool: prod ? "hidden-source-map" : "eval",
   // 애플리케이션 진입점
   entry: "./src/index.tsx",
   // entry: {
@@ -21,6 +25,14 @@ module.exports = {
 
   resolve: {
     extensions: [".js", ".jsx", ".ts", ".tsx"],
+  },
+
+  devServer: {
+    historyApiFallback: true,
+    inline: true,
+    port: 3000,
+    hot: true,
+    publicPath: "/",
   },
   // loader 설정
   module: {
@@ -56,6 +68,7 @@ module.exports = {
       filename: "index.html",
       inject: "body",
     }),
+    new webpack.HotModuleReplacementPlugin(),
   ],
 
   // 개발 서버 설정
