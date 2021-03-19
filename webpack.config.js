@@ -5,6 +5,7 @@ const path = require("path");
 const prod = process.env.NODE_ENV === "production";
 const webpack = require("webpack");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const { WebpackManifestPlugin } = require("webpack-manifest-plugin");
 
 module.exports = {
   // production, development, none 3가지의 옵션이 존재
@@ -17,10 +18,27 @@ module.exports = {
   // entry: {
   //   kb: ["babel-polyfill", "./src/index.tsx"],
   // },
+
+  optimization: {
+    splitChunks: {
+      cacheGroups: {
+        vendor: {
+          chunks: "initial",
+          name: "vendor",
+          enforce: true,
+        },
+      },
+    },
+  },
+
   // 번들된 파일을 저장할 경로
   // 기본값은 ./dist/main.js
   output: {
-    filename: "bundle.[hash].js",
+    // filename: "bundle.[hash].js",
+    // 기본 설정인데 [id]는 청크 순서대로 0,1,2,3,...을 부여합니다.
+    // filename: "[name].[chunkhash].js",
+    path: path.join(__dirname, "/dist"),
+    filename: "[name].[chunkhash].js",
   },
   devtool: "source-map",
 
@@ -28,13 +46,6 @@ module.exports = {
     extensions: [".js", ".jsx", ".ts", ".tsx"],
   },
 
-  devServer: {
-    historyApiFallback: true,
-    inline: true,
-    port: 3000,
-    hot: true,
-    publicPath: "/",
-  },
   // loader 설정
   module: {
     rules: [
@@ -42,8 +53,11 @@ module.exports = {
         // es6 바벨 관련 loader
         test: /\.(js|jsx|ts|tsx)$/,
         exclude: /node_modules/,
-        use: {
-          loader: "babel-loader",
+        // use: {
+        loader: "babel-loader",
+        // },
+        options: {
+          plugins: ["@babel/plugin-syntax-dynamic-import"],
         },
         exclude: /node_modules/,
       },
@@ -59,7 +73,7 @@ module.exports = {
           },
         ],
       },
-      // css
+      // image, etc
       {
         test: /\.(ico|png|jpg|jpeg|gif|svg|woff|woff2|ttf|eot)(\?v=[0-9]\.[0-9]\.[0-9])?$/,
         loader: "url-loader",
@@ -67,6 +81,10 @@ module.exports = {
           name: "[hash].[ext]",
           limit: 10000,
         },
+      },
+      {
+        test: /\.css$/,
+        use: [MiniCssExtractPlugin.loader, "css-loader", "postcss-loader"],
       },
     ],
   },
@@ -81,6 +99,10 @@ module.exports = {
     new webpack.HotModuleReplacementPlugin(),
     // 기타 플러그인
     new MiniCssExtractPlugin({ filename: "app.css" }),
+    new WebpackManifestPlugin({
+      fileName: "assets.json",
+      basePath: path.join(__dirname, "/"),
+    }),
   ],
 
   // 개발 서버 설정
@@ -89,5 +111,18 @@ module.exports = {
     host: "localhost",
     port: port,
     open: true, // open page when start
+    hot: true,
+    inline: true,
+    historyApiFallback: true,
+    contentBase: path.resolve(__dirname, "/dist"),
+    watchContentBase: true,
   },
+
+  // devServer: {
+  //   historyApiFallback: true,
+  //   inline: true,
+  //   port: 3000,
+  //   hot: true,
+  //   publicPath: "/",
+  // },
 };

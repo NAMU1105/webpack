@@ -1,0 +1,1 @@
+{"version":3,"sources":["webpack://webpack_test/./src/components/Card.css"],"names":[],"mappings":"AAAA;EACE,sBAAsB;AACxB","file":"app.css","sourcesContent":[".test {\r\n  background-color: blue;\r\n}\r\n"],"sourceRoot":""}
