@@ -1,9 +1,10 @@
 // webpack.config.js
 const HtmlWebpackPlugin = require("html-webpack-plugin");
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 3001;
 const path = require("path");
 const prod = process.env.NODE_ENV === "production";
 const webpack = require("webpack");
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 
 module.exports = {
   // production, development, none 3가지의 옵션이 존재
@@ -58,6 +59,15 @@ module.exports = {
           },
         ],
       },
+      // css
+      {
+        test: /\.(ico|png|jpg|jpeg|gif|svg|woff|woff2|ttf|eot)(\?v=[0-9]\.[0-9]\.[0-9])?$/,
+        loader: "url-loader",
+        options: {
+          name: "[hash].[ext]",
+          limit: 10000,
+        },
+      },
     ],
   },
   // 플러그인
@@ -69,6 +79,8 @@ module.exports = {
       inject: "body",
     }),
     new webpack.HotModuleReplacementPlugin(),
+    // 기타 플러그인
+    new MiniCssExtractPlugin({ filename: "app.css" }),
   ],
 
   // 개발 서버 설정
