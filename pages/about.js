@@ -1,6 +1,6 @@
 import Router from "next/router";
 
-export default (props) => {
+const About = (props) => {
   return (
     <div>
       About
@@ -12,3 +12,4 @@ export default (props) => {
     </div>
   );
 };
+export default About;

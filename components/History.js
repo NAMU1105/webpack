@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React from "react";
 import { withRouter } from "next/router";
 
 const styles = {
@@ -7,13 +7,12 @@ const styles = {
   },
 };
 
-class History extends Component {
-  render() {
-    const { router } = this.props;
-    return router.query.history ? (
-      <div style={styles.history}>{router.query.history}</div>
-    ) : null;
-  }
-}
+const History = (props) => {
+  const { router } = props;
+
+  return router.query.history ? (
+    <div style={styles.history}>{router.query.history}</div>
+  ) : null;
+};
 
 export default withRouter(History);

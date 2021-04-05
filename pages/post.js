@@ -1,6 +1,6 @@
 import Router from "next/router";
 
-export default (props) => {
+const POSTS = (props) => {
   return (
     <div>
       First post page
@@ -10,3 +10,5 @@ export default (props) => {
     </div>
   );
 };
+
+export default POSTS;
