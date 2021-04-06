@@ -44,6 +44,10 @@ module.exports = {
 
   resolve: {
     extensions: [".js", ".jsx", ".ts", ".tsx"],
+    alias: {
+      "react-dom": "@hot-loader/react-dom",
+      process: "process/browser",
+    },
   },
 
   // loader 설정
@@ -59,7 +63,12 @@ module.exports = {
         options: {
           plugins: ["@babel/plugin-syntax-dynamic-import"],
         },
-        exclude: /node_modules/,
+      },
+      // hot-loader적용
+      {
+        test: /\.(js|jsx|ts|tsx)$/,
+        use: "react-hot-loader/webpack",
+        include: /node_modules/,
       },
       {
         // html loader
@@ -102,6 +111,9 @@ module.exports = {
     new WebpackManifestPlugin({
       fileName: "assets.json",
       basePath: path.join(__dirname, "/"),
+    }),
+    new webpack.ProvidePlugin({
+      process: "process/browser",
     }),
   ],
 
