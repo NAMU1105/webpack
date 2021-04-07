@@ -90,6 +90,7 @@ module.exports = {
           name: "[hash].[ext]",
           limit: 10000,
         },
+        //  use: ["file-loader"],
       },
       {
         test: /\.css$/,
@@ -104,6 +105,7 @@ module.exports = {
       template: "./public/index.html",
       filename: "index.html",
       inject: "body",
+      favicon: "./public/favicon.svg",
     }),
     new webpack.HotModuleReplacementPlugin(),
     // 기타 플러그인

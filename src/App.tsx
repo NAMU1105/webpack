@@ -1,18 +1,43 @@
 import React from "react";
+import { BrowserRouter as Router, Redirect, Switch } from "react-router-dom";
+
 import { hot } from "react-hot-loader/root";
-import { ApolloProvider } from "@apollo/client/react";
+// routes
+import { authRoutes } from "./routes/allRoutes";
 
-import Card from "./components/card";
+// router component
+import Authmiddleware from "./routes/middleware/authMiddleWare";
 
-// const client = new ApolloClient({ uri, cache });
+// import Card from "./components/card";
+import Header from "./components/navigation/header";
+import Footer from "./components/navigation/footer";
+
+//import Auth from "./pages/auth";
 
 const App = () => {
   return (
-    <div className="font-inter">
-      {/* <ApolloProvider client={client}> */}
-      Hello, Webpack and typescript!!!!!
-      <Card />
-      {/* </ApolloProvider> */},
+    <div id="app" className="font-inter bg-gray-400">
+      <Router>
+        <Header />
+        <main className="min-h-content px-6">
+          <Switch>
+            {authRoutes.map((route, idx) => (
+              <Authmiddleware
+                path={route.path}
+                // layout={NonAuthLayout}
+                component={route.component}
+                key={idx}
+                isAuthProtected={false}
+              />
+            ))}
+
+            <Redirect to="/login" />
+          </Switch>
+
+          {/* <Card /> */}
+        </main>
+        <Footer />
+      </Router>
     </div>
   );
 };

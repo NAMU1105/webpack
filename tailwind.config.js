@@ -45,6 +45,7 @@ module.exports = {
         // TODO: 자주 사용하는 컬러 선언 할 것(버튼 컬러, 뱃지 컬러 등 -네이버 라이브 커머스 등 참조)
         header: "rgba(255, 255, 255, 0.9)",
         disabled: "#736f6f4d",
+        backdrop: "#0000003b",
         danger: {
           DEFAULT: "#b91c1c",
           dark: "#7f1d1d",
@@ -147,9 +148,9 @@ module.exports = {
       spacing: {
         0.25: "0.1rem",
         1.2: "0.3rem",
-        header: "4rem",
+        header: "3rem",
         footer: "6rem",
-        content: "calc(100vh - 12rem)",
+        content: "calc(100vh - 3rem)",
         sidenav: "17rem",
         logoHeight: "20px",
         "1/10": "10%",
@@ -166,7 +167,7 @@ module.exports = {
       },
 
       minHeight: {
-        content: "calc(100vh - 12rem)",
+        content: "calc(100vh - 3rem)",
         100: "20rem",
       },
 
@@ -199,6 +200,7 @@ module.exports = {
         sidenav: "17rem",
         main: "calc(100vw-17rem)",
         searchIcon: "30px",
+        "9/10": "90%",
       },
 
       // inset: (theme, { negative }) => ({
