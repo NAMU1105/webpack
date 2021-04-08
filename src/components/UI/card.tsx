@@ -38,7 +38,7 @@ const Card: React.FC<IF> = (props: IF) => {
   //   2. 카드 바디
   //////////////////////////////////
   type CardBodyType = {
-    cardBodyTable: React.ReactNode | React.FC;
+    cardBody: React.ReactNode | React.FC;
   };
 
   const CardBody: React.FC<CardBodyType> = (props: CardBodyType) => {
@@ -62,11 +62,11 @@ const Card: React.FC<IF> = (props: IF) => {
               Search
             </Button>
           </div>
-          <span className="inline-block ml-auto px-2 bg-gray-500 text-white rounded-md">
-            {"7"}
+          <span className="inline-block ml-auto p-2 bg-gray-500 text-white rounded-xl">
+            7
           </span>
         </div>
-        <div className="overflow-scroll">{props.cardBodyTable}</div>
+        <div>{props.cardBody}</div>
       </div>
     );
   };
@@ -85,7 +85,7 @@ const Card: React.FC<IF> = (props: IF) => {
   ////////////////////////////card//////////////////////////////////////
   //////////////////////////////////////////////////////////////////////
   return (
-    <div className="pb-4 shadow-xl bg-white rounded-xl overflow-hidden max-w-90vw">
+    <div className="pb-4 shadow-xl bg-white rounded-xl overflow-hidden">
       <CardHeader
         title={"test"}
         subTitle={"sub"}
@@ -113,7 +113,7 @@ const Card: React.FC<IF> = (props: IF) => {
         }
       />
       <CardBody
-        cardBodyTable={
+        cardBody={
           <Table>
             <TheadWrapper>
               <tr>
@@ -146,14 +146,81 @@ const Card: React.FC<IF> = (props: IF) => {
               </tr>
             </TheadWrapper>
             <TbodyWrapper>
-              <tr>
+              <TR>
+                {/* tailwind는 적용 안 되는 걸로 보이는데
+                  스타일링 필요하면 스타일드 컴포넌트로 만들어서 보내기
+                  */}
+                <TD value={<div className="text-indigo-600">test</div>} />
+                <TD
+                  value={
+                    <div>
+                      testtesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttest
+                    </div>
+                  }
+                />
+                <TD
+                  value={
+                    <>
+                      <div>test</div>
+                      <div>test</div>
+                      <div>test</div>
+                    </>
+                  }
+                />
+                <TD
+                  value={
+                    <div style={{ display: "flex", flexWrap: "wrap" }}>
+                      <div>test</div>
+                      <div>test</div>
+                      <div>test</div>
+                      <div>test</div>
+                      <button></button>
+                    </div>
+                  }
+                />
+                <TD value={<div>test</div>} />
+                <TD value={<div style={{ color: "red" }}>test</div>} />
+              </TR>
+              <TR>
                 <TD value={<div style={{ color: "red" }}>test</div>} />
                 <TD value={<div>test</div>} />
                 <TD value={<div>test</div>} />
                 <TD value={<div>test</div>} />
                 <TD value={<div>test</div>} />
                 <TD value={<div style={{ color: "red" }}>test</div>} />
-              </tr>
+              </TR>
+              <TR>
+                <TD value={<div style={{ color: "red" }}>test</div>} />
+                <TD value={<div>test</div>} />
+                <TD value={<div>test</div>} />
+                <TD value={<div>test</div>} />
+                <TD value={<div>test</div>} />
+                <TD value={<div style={{ color: "red" }}>test</div>} />
+              </TR>
+              <TR>
+                <TD value={<div style={{ color: "red" }}>test</div>} />
+                <TD value={<div>test</div>} />
+                <TD value={<div>test</div>} />
+                <TD value={<div>test</div>} />
+                <TD value={<div>test</div>} />
+                <TD value={<div style={{ color: "red" }}>test</div>} />
+              </TR>
+              <TR>
+                <TD value={<div style={{ color: "red" }}>test</div>} />
+                <TD value={<div>test</div>} />
+                <TD value={<div>test</div>} />
+                <TD value={<div>test</div>} />
+                <TD value={<div>test</div>} />
+                <TD value={<div style={{ color: "red" }}>test</div>} />
+              </TR>
+              <TR>
+                <TD value={<div style={{ color: "red" }}>test</div>} />
+                <TD value={<div>test</div>} />
+                <TD value={<div>test</div>} />
+                <TD value={<div>test</div>} />
+                <TD value={<div>test</div>} />
+                <TD value={<div style={{ color: "red" }}>test</div>} />
+              </TR>
             </TbodyWrapper>
           </Table>
         }

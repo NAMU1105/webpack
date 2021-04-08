@@ -1,27 +1,43 @@
 import React, { ReactChildren } from "react";
 import styled, { css } from "styled-components";
 import tw from "twin.macro";
+import { ProgressPlugin } from "webpack";
 
 // CSS
 // TODO: CSS 파일 나누기
 const TableWrapper = styled.table.attrs((props: any) => ({
   className:
-    "divide-y divide-gray-200 shadow border-b border-gray-200 sm:rounded-lg bg-white ",
+    "min-w-full divide-y divide-gray-200 shadow overflow-hidden border-b border-gray-200 sm:rounded-lg bg-white ",
 }))<any>``;
 
 const ThWrapper = styled.th.attrs({
   className:
-    "text-left text-xs font-medium text-gray-500 uppercase tracking-wider ",
-  //"px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider ",
+    "px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider ",
 })``;
 const TrWrapper = styled.tr.attrs({
-  className: "border-b border-gray-200",
+  className: "w-full border-b border-gray-200",
 })``;
+
+// const TDWrapper = styled.td.attrs((props: any) => ({
+//   className: "px-6 py-4 whitespace-nowrap border-b border-gray-200",
+// }))<any>`
+//   & {
+//     > div {
+//       /* ${tw`text-sm text-gray-900 whitespace-nowrap overflow-ellipsis overflow-hidden`} */
+//       white-space: nowrap;
+//       overflow: hidden;
+//       text-overflow: ellipsis;
+//       font-size: 0.875rem;
+//       line-height: 1.25rem;
+//       /* float: ${props.align}; */
+//     }
+//   }
+// `;
 
 const TDWrapper = styled.td<any>`
   white-space: nowrap;
   padding: 1.5rem 1rem;
-  border-bottom: 1px rgb(107, 114, 128) solid;
+  border-bottom: 1px rgb(229, 231, 235) solid;
   max-width: ${(props) => props.maxwidth};
 
   & > div {
