@@ -150,7 +150,7 @@ module.exports = {
         1.2: "0.3rem",
         header: "3rem",
         footer: "6rem",
-        content: "calc(100vh - 3rem)",
+        content: "calc(100vh - 6rem)",
         sidenav: "17rem",
         logoHeight: "20px",
         "1/10": "10%",
@@ -167,7 +167,7 @@ module.exports = {
       },
 
       minHeight: {
-        content: "calc(100vh - 3rem)",
+        content: "calc(100vh - 6rem)",
         100: "20rem",
       },
 
@@ -191,6 +191,7 @@ module.exports = {
         main: "calc(100vw-250px)",
         80: "20rem",
         "1/5": "20%",
+        "90vw": "90vw",
       },
       height: {
         fit: "fit-content",

@@ -15,6 +15,7 @@ import Logo from "../components/UI/logo";
 import { Input } from "../components/form/input";
 import Button from "../components/form/button";
 import Loading from "../components/UI/loading";
+import Card from "../components/UI/card";
 
 const Captch = styled.div`
   & > div {
@@ -206,54 +207,55 @@ const Auth: React.FC<IF> = (props: IF) => {
   }, [authMode, location.pathname]);
 
   return (
-    <section className="flex justify-center items-center min-h-content">
-      <div className="w-9/10 lg:w-1/4  bg-white shadow-xl rounded-md flex flex-col overflow-hidden">
+    <section className="w-full flex justify-center items-center min-h-content">
+      {/* <div className="w-9/10 lg:w-1/4  bg-white shadow-xl rounded-md flex flex-col overflow-hidden">
         <h1 className="capitalize w-full p-4 bg-black text-white flex justify-between items-center">
           {title}
           <Logo type="LogoHorizontalDark" />
         </h1>
-        <div className="p-4 ">
-          <Formik
-            initialValues={{
-              email: "",
-              password: "",
-              firstName: "",
-              lastName: "",
-              captcha: "",
-              confirm: "",
-            }}
-            validationSchema={LoginSchema}
-            onSubmit={(values, { setSubmitting }) => {
-              setTimeout(() => {
-                alert(JSON.stringify(values, null, 2));
-                setSubmitting(false);
+        <div className="p-4 "> */}
+      <Formik
+        initialValues={{
+          email: "",
+          password: "",
+          firstName: "",
+          lastName: "",
+          captcha: "",
+          confirm: "",
+        }}
+        validationSchema={LoginSchema}
+        onSubmit={(values, { setSubmitting }) => {
+          setTimeout(() => {
+            alert(JSON.stringify(values, null, 2));
+            setSubmitting(false);
 
-                /**
+            /**
                  TODO: 
                  1. 회원가입: 성공 시 이메일 인증 페이지
                  2. 로그인: 성공 시 메인 페이지(/)
                  3. 비밀번호 리셋: 
                  4. 이메일 인증: 성공 시 로그인 페이지
                  * **/
-              }, 300);
-            }}
-          >
-            {({ errors, touched, handleSubmit, isSubmitting }) => (
-              <Form className="mt-8 space-y-6" onSubmit={handleSubmit}>
-                {isSubmitting && <Loading />}
-                {element}
-              </Form>
-            )}
-          </Formik>
+          }, 300);
+        }}
+      >
+        {({ errors, touched, handleSubmit, isSubmitting }) => (
+          <Form className="mt-8" onSubmit={handleSubmit}>
+            {isSubmitting && <Loading />}
+            {/* {element} */}
+            <Card />
+          </Form>
+        )}
+      </Formik>
 
-          <ReCAPTCHA
+      {/* <ReCAPTCHA
             sitekey={"6Lc0uJ8aAAAAAOCIJEm1YlQzfRiYLb7k-mRyk72h"}
             onChange={onChange}
             //ref={this._reCaptchaRef}
             //asyncScriptOnLoad={this.asyncScriptOnLoad}
           />
         </div>
-      </div>
+      </div> */}
     </section>
   );
 };

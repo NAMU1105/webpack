@@ -16,10 +16,10 @@ import Footer from "./components/navigation/footer";
 
 const App = () => {
   return (
-    <div id="app" className="font-inter bg-gray-400">
+    <div id="app" className="font-inter bg-gray-100">
       <Router>
         <Header />
-        <main className="min-h-content px-6">
+        <main className="min-h-content p-6">
           <Switch>
             {authRoutes.map((route, idx) => (
               <Authmiddleware

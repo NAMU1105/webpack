@@ -34,9 +34,11 @@ const SIZE_VARIANT_MAPS = {
   full: "w-full text-lg",
 };
 
+// TODO: custom 프롭스 하나 만들고 그거 모두 상속하기(공통적인 부분, 예를 들어서 컬러 같은 거)
+
 interface ButtonProps {
   type?: "button" | "link" | "submit";
-  color?: "white" | "black" | "primary" | "secondary" | "danger";
+  color?: "white" | "black" | "primary" | "secondary" | "danger" | "gray";
   bgColor?: "primary" | "secondary" | "danger" | "transparent" | "white";
   design?: "contained" | "text" | "outlined" | "withIcon";
   size?: "sm" | "md" | "lg" | "full";

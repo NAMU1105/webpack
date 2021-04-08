@@ -33,7 +33,7 @@ interface InputProps {
   name: string;
   id?: string;
   label: string;
-  noLabel?: boolean;
+  nolabel?: boolean;
   align?: "inline-flex" | "";
   // design?: "filled" | "outlined"; //dashed, dotted..
   disabled?: boolean;
@@ -242,7 +242,7 @@ interface InputTextProps extends InputProps {
 ////****************************** */
 // inputText
 ////****************************** */
-export const Input: React.FC<InputTextProps> = (props) => {
+export const Input: React.FC<InputTextProps> = (props: InputTextProps) => {
   const [field, { error, touched }] = useField({
     name: props.name,
   });
@@ -333,6 +333,8 @@ export const Input: React.FC<InputTextProps> = (props) => {
           }
           ${props.color ? COLOR_VARIANT_MAPS[props.color] : `border-gray-200`}
           ${props.bgcolor ? BGCOLOR_VARIANT_MAPS[props.bgcolor] : `bg-white`}
+          ${FIELD_SIZE_VARIANT_MAPS[props.fieldsize]}
+
           `}
         >
           <label
@@ -371,13 +373,13 @@ export const Input: React.FC<InputTextProps> = (props) => {
         // 일반 인풋일 경우
         // <div className={`w-full`}>
         <div
-          className={classNames`w-full flex flex-col capitalize ${
-            props.customstyle && props.customstyle
-          }`}
+          className={classNames`flex flex-col capitalize  items-center
+          ${FIELD_SIZE_VARIANT_MAPS[props.fieldsize]}
+          ${props.customstyle && props.customstyle}`}
         >
           <label
             className={
-              props.noLabel ? `sr-only` : `mb-2 ml-1 ${props.labelcustomstyle}`
+              props.nolabel ? `sr-only` : `mb-2 ml-1 ${props.labelcustomstyle}`
             }
           >
             {props.label}
@@ -390,7 +392,6 @@ export const Input: React.FC<InputTextProps> = (props) => {
               ${TEXT_TRANSFORM_VARIANT_MAPS[props.texttransform]}
               ${RING_COLOR_VARIANT_MAPS[props.ringcolor]}
               ${RING_WIDTH_VARIANT_MAPS[props.ringwidth]}
-              ${FIELD_SIZE_VARIANT_MAPS[props.fieldsize]}
               ${BGCOLOR_VARIANT_MAPS[props.bgcolor]}
               ${FONT_SIZE_VARIANT_MAPS[props.textsize]}
               ${ROUND_VARIANT_MAPS[props.rounded]}
@@ -411,6 +412,7 @@ Input.defaultProps = {
   ringcolor: "gray",
   rounded: "lg",
   inputtype: "normal",
+  fieldsize: "full",
 };
 
 ////****************************** */
@@ -469,10 +471,10 @@ interface RadioProps extends InputProps {
 
 export const RadioBlockTypeWrapper = (props: WithChildren) => {
   return (
-    <div role="group" aria-labelledby="my-radio-group">
+    <div role="group" aria-labelledby="my-radio-group" className={classNames``}>
       <ul
         // id="filter1"
-        className="filter-switch inline-flex items-center relative h-10 p-1 space-x-1 bg-gray-200 rounded-md font-semibold text-blue-600 my-4"
+        className={classNames`filter-switch inline-flex items-center relative h-10 p-1 space-x-1 bg-gray-200 rounded-md font-semibold text-blue-600`}
       >
         {props.children}
       </ul>
@@ -573,7 +575,7 @@ export const Select: React.FC<SelectProps> = ({ children, ...props }) => {
   return (
     <>
       <label className={`sr-only`} htmlFor={props.name}></label>
-      <span>{props.label}</span>
+      {/* <span>{props.label}</span> */}
       <select
         disabled={props.disabled}
         className={classNames`form-select mt-1 block rounded-md

@@ -172,7 +172,7 @@ const Header: React.FC<IF> = (props: IF) => {
       {/* {isSubHeaderOpen && ( */}
       <div
         className={classNames`focus:outline-none w-full fixed  pr-4 top-header h-header flex items-center justify-end shadow-sm
-        bg-gray-100 md:hidden
+        bg-black border-t-2 border-gray-400 transform -translate-x-6 md:hidden
         `}
       >
         <HeaderMenuItems sub />
