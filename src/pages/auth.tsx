@@ -12,7 +12,7 @@ import {
   ResetPasswordSchema,
 } from "../utils/validator";
 import Logo from "../components/UI/logo";
-import { Input } from "../components/form/input";
+import { Input, Radio, RadioBlockTypeWrapper } from "../components/form/input";
 import Button from "../components/form/button";
 import Loading from "../components/UI/loading";
 import Card from "../components/UI/card";
@@ -216,12 +216,7 @@ const Auth: React.FC<IF> = (props: IF) => {
         <div className="p-4 "> */}
       <Formik
         initialValues={{
-          email: "",
-          password: "",
-          firstName: "",
-          lastName: "",
-          captcha: "",
-          confirm: "",
+          searchType: "",
         }}
         validationSchema={LoginSchema}
         onSubmit={(values, { setSubmitting }) => {
@@ -240,7 +235,7 @@ const Auth: React.FC<IF> = (props: IF) => {
         }}
       >
         {({ errors, touched, handleSubmit, isSubmitting }) => (
-          <Form className="w-full mt-8" onSubmit={handleSubmit}>
+          <Form className="mt-8 w-full md:w-1/2 " onSubmit={handleSubmit}>
             {isSubmitting && <Loading />}
             {/* {element} */}
             <Card />

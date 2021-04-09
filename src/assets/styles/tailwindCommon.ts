@@ -41,20 +41,44 @@ export const BGCOLOR_VARIANT_MAPS = {
   secondary: "bg-secondary-navy",
   danger: "bg-danger",
 };
+
+// ring and border로 선언해서 써도 될 듯
+// export const RING_COLOR_VARIANT_MAPS = {
+//   white: "ring-white border-white focus:ring-white focus:border-white",
+//   black: "ring-black border-black focus:ring-black focus:border-black",
+//   gray:
+//     "ring-secondary-gray-light border-secondary-gray-light focus:ring-secondary-gray-light focus:border-secondary-gray-light",
+//   primary:
+//     "ring-primary border-primary focus:ring-primary focus:border-primary",
+//   secondary:
+//     "ring-secondary-navy border-secondary-navy focus:ring-secondary-navy focus:border-secondary-navy",
+//   danger: "ring-danger border-danger focus:ring-danger focus:border-danger",
+//   transparent:
+//     "ring-transparent border-transparent focus:ring-transparent focus:border-transparent",
+//   current:
+//     "ring-current border-current focus:ring-current focus:border-current",
+// };
+
 export const RING_COLOR_VARIANT_MAPS = {
-  white: "ring-white border-white focus:ring-white focus:border-white",
-  black: "ring-black border-black focus:ring-black focus:border-black",
-  gray:
-    "ring-secondary-gray-light border-secondary-gray-light focus:ring-secondary-gray-light focus:border-secondary-gray-light",
-  primary:
-    "ring-primary border-primary focus:ring-primary focus:border-primary",
-  secondary:
-    "ring-secondary-navy border-secondary-navy focus:ring-secondary-navy focus:border-secondary-navy",
-  danger: "ring-danger border-danger focus:ring-danger focus:border-danger",
-  transparent:
-    "ring-transparent border-transparent focus:ring-transparent focus:border-transparent",
-  current:
-    "ring-current border-current focus:ring-current focus:border-current",
+  white: "ring-white focus:ring-white",
+  black: "ring-black focus:ring-black",
+  gray: "ring-secondary-gray-light focus:ring-secondary-gray-light",
+  primary: "ring-primary focus:ring-primary",
+  secondary: "ring-secondary-navy focus:ring-secondary-navy",
+  danger: "ring-danger focus:ring-danger",
+  transparent: "ring-transparent focus:ring-transparent",
+  current: "ring-current focus:ring-current",
+};
+
+export const BORDER_COLOR_VARIANT_MAPS = {
+  white: "border-white focus:border-white",
+  black: "border-black focus:border-black",
+  gray: "border-secondary-gray-light focus:border-secondary-gray-light",
+  primary: "border-primary focus:border-primary",
+  secondary: "border-secondary-navy focus:border-secondary-navy",
+  danger: "border-danger focus:border-danger",
+  transparent: "border-transparent focus:border-transparent",
+  current: "border-current focus:border-current",
 };
 
 export const RING_WIDTH_VARIANT_MAPS = {
@@ -84,4 +108,12 @@ export const BOX_SIZE_VARIANT_MAPS = {
   md: "w-5 h-5",
   lg: "w-6 h-6",
   xl: "w-8 h-8",
+};
+
+export const ROUNDED_VARIANT_MAPS = {
+  none: "rounded-none",
+  base: "rounded",
+  sm: "rounded-sm",
+  md: "rounded-md",
+  lg: "rounded-lg",
 };

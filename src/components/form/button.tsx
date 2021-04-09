@@ -5,6 +5,7 @@ import {
   TEXT_TRANSFORM_VARIANT_MAPS,
   COLOR_VARIANT_MAPS,
   DISABLED_VARIANT_MAPS,
+  ROUNDED_VARIANT_MAPS,
 } from "../../assets/styles/tailwindCommon";
 
 const BGCOLOR_VARIANT_MAPS = {
@@ -19,11 +20,12 @@ const BGCOLOR_VARIANT_MAPS = {
   transparent: "focus:outline-none focus:ring-2  focus:border-transparent",
 };
 
+// TODO: 수정 필요
 const DESIGN_VARIANT_MAPS = {
   contained: "rounded-md",
   text:
     "bg-transparent focus:outline-none focus:ring-transparent focus:border-transparent",
-  outlined: "!bg-transparent border-2 rounded-md",
+  outlined: "!bg-transparent border-2",
   withIcon: "",
 };
 
@@ -49,6 +51,8 @@ interface ButtonProps {
   children?: React.ReactNode | React.FC | ReactChildren | string;
   onClick?: () => void;
   icon?: string;
+  rounded?: "none" | "base" | "sm" | "md" | "lg";
+  customstyle?: string;
 }
 
 const Button: React.FC<ButtonProps> = (props: ButtonProps) => {
@@ -56,13 +60,15 @@ const Button: React.FC<ButtonProps> = (props: ButtonProps) => {
     return (
       <a
         href={props.href}
-        className={classNames`cursor-pointer inline-flex items-center justify-center text-base font-medium rounded-md
+        className={classNames`cursor-pointer inline-flex items-center justify-center text-base font-medium
           ${COLOR_VARIANT_MAPS[props.color]}
           ${BGCOLOR_VARIANT_MAPS[props.bgColor]}
           ${DESIGN_VARIANT_MAPS[props.design]}
           ${SIZE_VARIANT_MAPS[props.size]}
           ${props.disabled && DISABLED_VARIANT_MAPS["button"]}
           ${TEXT_TRANSFORM_VARIANT_MAPS[props.textTransform]}  
+          ${ROUNDED_VARIANT_MAPS[props.rounded]}  
+          ${props.customstyle && props.customstyle}
           `}
       >
         {props.children}
@@ -73,13 +79,16 @@ const Button: React.FC<ButtonProps> = (props: ButtonProps) => {
       <button
         type={props.type || "button"}
         onClick={props.onClick}
-        className={classNames`cursor-pointer inline-flex items-center justify-center text-base font-medium rounded-md
+        className={classNames`cursor-pointer inline-flex items-center justify-center text-base font-medium
        ${COLOR_VARIANT_MAPS[props.color]}
        ${BGCOLOR_VARIANT_MAPS[props.bgColor]}
        ${DESIGN_VARIANT_MAPS[props.design]}
        ${SIZE_VARIANT_MAPS[props.size]}
        ${props.disabled && DISABLED_VARIANT_MAPS["button"]}
        ${TEXT_TRANSFORM_VARIANT_MAPS[props.textTransform]}  
+       ${ROUNDED_VARIANT_MAPS[props.rounded]}  
+       ${props.customstyle && props.customstyle}
+
        `}
       >
         {props.children}
@@ -91,12 +100,11 @@ const Button: React.FC<ButtonProps> = (props: ButtonProps) => {
 Button.defaultProps = {
   type: "button",
   color: "white",
-  design: "contained",
+  // design: "contained",
   size: "sm",
   disabled: null,
   textTransform: "uppercase",
   bgColor: "primary",
 };
-// Button.defaultProps = defaultProps;
 
 export default Button;

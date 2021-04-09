@@ -204,6 +204,13 @@ module.exports = {
         "9/10": "90%",
       },
 
+      borderRadius: {
+        inherit: "inherit",
+      },
+      divideWidth: {
+        1: "1px",
+      },
+
       // inset: (theme, { negative }) => ({
       // }),
     },

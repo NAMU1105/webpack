@@ -13,6 +13,7 @@ import {
   BGCOLOR_VARIANT_MAPS,
   RING_COLOR_VARIANT_MAPS,
   RING_WIDTH_VARIANT_MAPS,
+  BORDER_COLOR_VARIANT_MAPS,
   BORDER_WIDTH_VARIANT_MAPS,
   DISABLED_VARIANT_MAPS,
   BOX_SIZE_VARIANT_MAPS,
@@ -40,6 +41,15 @@ interface InputProps {
   color?: "white" | "black" | "gray" | "primary" | "secondary" | "danger";
   bgcolor?: "white" | "black" | "gray" | "primary" | "secondary" | "danger";
   ringcolor?:
+    | "white"
+    | "black"
+    | "gray"
+    | "primary"
+    | "secondary"
+    | "danger"
+    | "transparent"
+    | "current";
+  bordercolor?:
     | "white"
     | "black"
     | "gray"
@@ -471,10 +481,11 @@ interface RadioProps extends InputProps {
 
 export const RadioBlockTypeWrapper = (props: WithChildren) => {
   return (
-    <div role="group" aria-labelledby="my-radio-group" className={classNames``}>
+    <div role="group" aria-labelledby="my-radio-group">
+      {/* className={classNames``} */}
       <ul
         // id="filter1"
-        className={classNames`filter-switch inline-flex items-center relative h-10 p-1 space-x-1 bg-gray-200 rounded-md font-semibold text-blue-600`}
+        className={classNames`p-1 filter-switch inline-flex items-center relative h-10 space-x-1 bg-gray-200 rounded-md font-semibold text-blue-600`}
       >
         {props.children}
       </ul>
@@ -490,7 +501,7 @@ export const Radio: React.FC<RadioProps> = ({ children, ...props }) => {
   switch (props.radiotype) {
     case "blockChild":
       return (
-        <li className="filter-switch-item flex relative h-8 ">
+        <li className="filter-switch-item flex relative h-8 shadow-lg rounded-md  ">
           <input
             type="radio"
             disabled={props.disabled}
@@ -582,6 +593,9 @@ export const Select: React.FC<SelectProps> = ({ children, ...props }) => {
         ${COLOR_VARIANT_MAPS[props.color]}
         ${TEXT_TRANSFORM_VARIANT_MAPS[props.texttransform]}
         ${RING_WIDTH_VARIANT_MAPS[props.ringwidth]}
+        ${BORDER_WIDTH_VARIANT_MAPS[props.borderwidth]}
+        ${RING_COLOR_VARIANT_MAPS[props.ringcolor]}
+        ${BORDER_COLOR_VARIANT_MAPS[props.bordercolor]}
         ${FIELD_SIZE_VARIANT_MAPS[props.fieldsize]}
         ${BGCOLOR_VARIANT_MAPS[props.bgcolor]}
         ${props.customstyle && props.customstyle}
@@ -595,6 +609,13 @@ export const Select: React.FC<SelectProps> = ({ children, ...props }) => {
       {/* {meta.touched && meta.error ? <div className="error"></div> : null} */}
     </>
   );
+};
+
+Select.defaultProps = {
+  ringcolor: "gray",
+  bordercolor: "gray",
+  rounded: "lg",
+  borderwidth: "sm",
 };
 
 ////****************************** */

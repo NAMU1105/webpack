@@ -22,7 +22,7 @@ const Card: React.FC<IF> = (props: IF) => {
   };
   const CardHeader = (props: CardHeaderType) => {
     return (
-      <div className="cardHeader p-4 flex flex-col bg-black text-white  divide-y-2 divide-white rounded-t-xl ">
+      <div className="cardHeader p-4 flex flex-col bg-black text-white  divide-y-1 divide-white rounded-t-xl ">
         <div className="flex justify-between pb-4">
           <div>{props.title}</div>
           {props.subTitle && <div>{props.subTitle}</div>}
@@ -44,26 +44,37 @@ const Card: React.FC<IF> = (props: IF) => {
   const CardBody: React.FC<CardBodyType> = (props: CardBodyType) => {
     return (
       <div className="cardBody w-full px-4 pt-4 overflow-x-scroll">
-        <div className="flex justify-center items-center mb-4 ">
+        <div className="flex justify-center items-center mb-4">
           <div className="flex-1 flex justify-center items-center ">
-            <Select label="select default" name="select">
-              <option>$1,000</option>
-              <option>$5,000</option>
-              <option>$10,000</option>
+            <div className="flex justify-center item rounded w-max border border-gray-400">
+              <select className="rounded-inherit" name="" id="">
+                <option value="">1</option>
+                <option value="">1</option>
+                <option value="">1</option>
+              </select>
+              <input
+                className="md:w-auto w-12"
+                type="text"
+                name=""
+                id=""
+                placeholder="test"
+              />
+              <Button rounded="none" customstyle="!bg-gray-400">
+                search
+              </Button>
+            </div>
+
+            {/* <Select label="select default" name="select">
+              <option>ID</option>
+              <option>Author</option>
+              <option>Name</option>
             </Select>
-            {/* <Input
-              type="text"
-              label="search"
-              name="cardSearch"
-              nolabel
-              customstyle=
-            /> */}
             <input type="text" name="" id="" placeholder="test input" />
             <Button type="submit" bgColor="white" color="gray">
               Search
-            </Button>
+            </Button> */}
           </div>
-          <span className="inline-block ml-auto px-2 bg-gray-500 text-white rounded">
+          <span className="inline-block ml-auto px-2 bg-gray-400 text-white rounded">
             7
           </span>
         </div>
@@ -80,18 +91,15 @@ const Card: React.FC<IF> = (props: IF) => {
     pagination: React.ReactNode | React.FC;
   };
   const CardFooter: React.FC<CardFooterType> = (props: CardFooterType) => {
-    return (
-      <div className="px-4 flex justify-center overscroll-x-scroll">
-        {props.pagination}
-      </div>
-    );
+    return <div className="px-4 flex justify-center">{props.pagination}</div>;
   };
 
   //////////////////////////////////////////////////////////////////////
   ////////////////////////////card//////////////////////////////////////
   //////////////////////////////////////////////////////////////////////
   return (
-    <div className="card pb-4 shadow-xl bg-white rounded-xl overflow-x-scroll">
+    <div className="card pb-4 shadow-xl bg-white rounded-xl">
+      {/* <div className="card pb-4 shadow-xl bg-white rounded-xl overflow-x-scroll"> */}
       <CardHeader
         title={"test"}
         subTitle={"sub"}
@@ -99,21 +107,33 @@ const Card: React.FC<IF> = (props: IF) => {
           <RadioBlockTypeWrapper>
             <Radio
               radiotype="blockChild"
-              name={"test1"}
-              value={"test1"}
-              label={"test1"}
+              name={"searchType"}
+              value={"Event"}
+              label={"Event"}
             />
             <Radio
               radiotype="blockChild"
-              name={"test2"}
-              value={"test2"}
-              label={"test2"}
+              name={"searchType"}
+              value={"VOD"}
+              label={"VOD"}
             />
             <Radio
               radiotype="blockChild"
-              name={"test3"}
-              value={"test3"}
-              label={"test3"}
+              name={"searchType"}
+              value={"Team"}
+              label={"Team"}
+            />
+            <Radio
+              radiotype="blockChild"
+              name={"searchType"}
+              value={"System"}
+              label={"System"}
+            />
+            <Radio
+              radiotype="blockChild"
+              name={"searchType"}
+              value={"Venue"}
+              label={"Venue"}
             />
           </RadioBlockTypeWrapper>
         }

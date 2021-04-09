@@ -35,7 +35,7 @@ const TrWrapper = styled.tr.attrs({
 
 const TDWrapper = styled.td<any>`
   white-space: nowrap;
-  padding: 1.5rem 1rem;
+  padding: 1em 1.5rem;
   border-bottom: 1px rgb(229, 231, 235) solid;
   max-width: ${(props) => props.maxwidth};
 
