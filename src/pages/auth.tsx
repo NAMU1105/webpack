@@ -240,7 +240,7 @@ const Auth: React.FC<IF> = (props: IF) => {
         }}
       >
         {({ errors, touched, handleSubmit, isSubmitting }) => (
-          <Form className="mt-8" onSubmit={handleSubmit}>
+          <Form className="w-full mt-8" onSubmit={handleSubmit}>
             {isSubmitting && <Loading />}
             {/* {element} */}
             <Card />

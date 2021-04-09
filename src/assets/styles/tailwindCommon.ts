@@ -1,4 +1,5 @@
 export const FIELD_SIZE_VARIANT_MAPS = {
+  sm: "w-8",
   md: "w-1/3",
   lg: "w-1/2",
   full: "w-full font-lg",

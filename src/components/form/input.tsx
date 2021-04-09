@@ -50,7 +50,7 @@ interface InputProps {
     | "current";
   ringwidth?: "sm" | "md" | "lg";
   texttransform?: "uppercase" | "capitalize" | "lowercase";
-  fieldsize?: "md" | "lg" | "full" | "auto";
+  fieldsize?: "sm" | "md" | "lg" | "full" | "auto";
   rounded?: "sm" | "md" | "lg" | "full";
   textsize?: "sm" | "base" | "lg" | "xl";
   customstyle?: string;

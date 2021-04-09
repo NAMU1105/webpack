@@ -165,8 +165,8 @@ const Pagination: React.FC<PaginationProps> = (props: PaginationProps) => {
         onClick={() => changePage(pageTo)}
         className={
           currentPage === pageTo.pageTo
-            ? `relative inline-flex items-center px-4 py-2 border border-gray-300 bg-indigo-50 text-sm font-medium  hover:bg-indigo-100`
-            : `relative inline-flex items-center px-4 py-2 border border-gray-300 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50`
+            ? `relative inline-flex items-center px-2 py-1 md:px-4 md:py-2 border border-gray-300 bg-indigo-50 text-sm font-medium  hover:bg-indigo-100`
+            : `relative inline-flex items-center px-2 py-1 md:px-4 md:py-2 border border-gray-300 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50`
         }
       >
         {pageTo.pageTo}

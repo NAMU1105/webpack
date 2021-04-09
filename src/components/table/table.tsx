@@ -1,13 +1,12 @@
 import React, { ReactChildren } from "react";
 import styled, { css } from "styled-components";
-import tw from "twin.macro";
-import { ProgressPlugin } from "webpack";
+//import tw from "twin.macro";
 
 // CSS
 // TODO: CSS 파일 나누기
 const TableWrapper = styled.table.attrs((props: any) => ({
   className:
-    "min-w-full divide-y divide-gray-200 shadow overflow-hidden border-b border-gray-200 sm:rounded-lg bg-white ",
+    "mb-4 w-full overflow-hidden divide-y divide-gray-200 shadow border-b border-gray-200 sm:rounded-lg bg-white ",
 }))<any>``;
 
 const ThWrapper = styled.th.attrs({

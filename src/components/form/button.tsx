@@ -28,10 +28,11 @@ const DESIGN_VARIANT_MAPS = {
 };
 
 const SIZE_VARIANT_MAPS = {
-  sm: "w-auto text-sm",
-  md: "w-24 text-md",
-  lg: "w-6/12 text-lg",
-  full: "w-full text-lg",
+  auto: "w-auto px-5 py-3  text-base",
+  sm: "px-2 py-1  text-sm",
+  md: "px-8 py-6  text-md",
+  lg: "px-10 py-8  text-lg",
+  full: "w-full px-5 py-3 text-lg",
 };
 
 // TODO: custom 프롭스 하나 만들고 그거 모두 상속하기(공통적인 부분, 예를 들어서 컬러 같은 거)
@@ -41,7 +42,7 @@ interface ButtonProps {
   color?: "white" | "black" | "primary" | "secondary" | "danger" | "gray";
   bgColor?: "primary" | "secondary" | "danger" | "transparent" | "white";
   design?: "contained" | "text" | "outlined" | "withIcon";
-  size?: "sm" | "md" | "lg" | "full";
+  size?: "auto" | "sm" | "md" | "lg" | "full";
   disabled?: "true" | null;
   textTransform?: "uppercase" | "capitalize" | "lowercase";
   href?: string;
@@ -55,7 +56,7 @@ const Button: React.FC<ButtonProps> = (props: ButtonProps) => {
     return (
       <a
         href={props.href}
-        className={classNames`cursor-pointer inline-flex items-center justify-center px-5 py-3 text-base font-medium rounded-md
+        className={classNames`cursor-pointer inline-flex items-center justify-center text-base font-medium rounded-md
           ${COLOR_VARIANT_MAPS[props.color]}
           ${BGCOLOR_VARIANT_MAPS[props.bgColor]}
           ${DESIGN_VARIANT_MAPS[props.design]}
@@ -72,7 +73,7 @@ const Button: React.FC<ButtonProps> = (props: ButtonProps) => {
       <button
         type={props.type || "button"}
         onClick={props.onClick}
-        className={classNames`cursor-pointer inline-flex items-center justify-center px-5 py-3 text-base font-medium rounded-md
+        className={classNames`cursor-pointer inline-flex items-center justify-center text-base font-medium rounded-md
        ${COLOR_VARIANT_MAPS[props.color]}
        ${BGCOLOR_VARIANT_MAPS[props.bgColor]}
        ${DESIGN_VARIANT_MAPS[props.design]}
