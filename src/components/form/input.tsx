@@ -383,8 +383,8 @@ export const Input: React.FC<InputTextProps> = (props: InputTextProps) => {
         // 일반 인풋일 경우
         // <div className={`w-full`}>
         <div
-          className={classNames`flex flex-col capitalize  items-center
-          ${FIELD_SIZE_VARIANT_MAPS[props.fieldsize]}
+          className={classNames`flex flex-col capitalize 
+          // ${FIELD_SIZE_VARIANT_MAPS[props.fieldsize]}
           ${props.customstyle && props.customstyle}`}
         >
           <label
@@ -397,7 +397,8 @@ export const Input: React.FC<InputTextProps> = (props: InputTextProps) => {
           <input
             className={
               // props.disabled              ? `${DISALBED_INPUT}`              :
-              classNames`form-input border border-transparent focus:border-transparent
+              classNames`form-input border
+              ${FIELD_SIZE_VARIANT_MAPS[props.fieldsize]}
               ${COLOR_VARIANT_MAPS[props.color]}
               ${TEXT_TRANSFORM_VARIANT_MAPS[props.texttransform]}
               ${RING_COLOR_VARIANT_MAPS[props.ringcolor]}
@@ -423,6 +424,7 @@ Input.defaultProps = {
   rounded: "lg",
   inputtype: "normal",
   fieldsize: "full",
+  bordercolor: "gray",
 };
 
 ////****************************** */

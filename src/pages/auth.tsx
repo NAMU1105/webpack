@@ -91,7 +91,7 @@ const Auth: React.FC<IF> = (props: IF) => {
               placeholder="password"
             />
 
-            <div className="flex justify-between items-center">
+            <div className="flex justify-between items-center mt-4">
               <Button size="sm" type="submit" bgColor="white" color="black">
                 signup
               </Button>
@@ -131,15 +131,14 @@ const Auth: React.FC<IF> = (props: IF) => {
               placeholder="email"
             />
 
-            {/* TODO: captch 넣기 */}
-            <Input
+            {/* <Input
               type="text"
               name="captcha"
               label="captcha"
               placeholder="captcha"
-            />
+            /> */}
 
-            <div className="flex justify-between items-center">
+            <div className="flex justify-between items-center mt-4">
               <Button size="sm" type="submit" bgColor="white" color="black">
                 reset
               </Button>
@@ -162,7 +161,13 @@ const Auth: React.FC<IF> = (props: IF) => {
               placeholder="confirm code"
             />
 
-            <Button size="sm" type="submit" bgColor="white" color="black">
+            <Button
+              customstyle="mt-4"
+              size="sm"
+              type="submit"
+              bgColor="white"
+              color="black"
+            >
               submit
             </Button>
           </>
@@ -180,15 +185,17 @@ const Auth: React.FC<IF> = (props: IF) => {
               name="email"
               label="email"
               placeholder="email"
+              fieldsize="full"
             />
             <Input
               type="password"
               name="password"
               label="password"
               placeholder="password"
+              fieldsize="full"
             />
 
-            <div className="flex justify-between items-center">
+            <div className="flex justify-between items-center mt-4">
               <Button size="sm" type="submit" bgColor="white" color="black">
                 login
               </Button>
@@ -208,49 +215,51 @@ const Auth: React.FC<IF> = (props: IF) => {
 
   return (
     <section className="w-full flex justify-center items-center min-h-content">
-      {/* <div className="w-9/10 lg:w-1/4  bg-white shadow-xl rounded-md flex flex-col overflow-hidden">
+      <div className="w-9/10 lg:w-1/3  bg-white shadow-xl rounded-md flex flex-col overflow-hidden">
         <h1 className="capitalize w-full p-4 bg-black text-white flex justify-between items-center">
           {title}
           <Logo type="LogoHorizontalDark" />
         </h1>
-        <div className="p-4 "> */}
-      <Formik
-        initialValues={{
-          searchType: "",
-        }}
-        validationSchema={LoginSchema}
-        onSubmit={(values, { setSubmitting }) => {
-          setTimeout(() => {
-            alert(JSON.stringify(values, null, 2));
-            setSubmitting(false);
+        <div className="p-4 ">
+          <Formik
+            initialValues={{
+              searchType: "",
+            }}
+            validationSchema={LoginSchema}
+            onSubmit={(values, { setSubmitting }) => {
+              setTimeout(() => {
+                alert(JSON.stringify(values, null, 2));
+                setSubmitting(false);
 
-            /**
+                /**
                  TODO: 
                  1. 회원가입: 성공 시 이메일 인증 페이지
                  2. 로그인: 성공 시 메인 페이지(/)
                  3. 비밀번호 리셋: 
                  4. 이메일 인증: 성공 시 로그인 페이지
                  * **/
-          }, 300);
-        }}
-      >
-        {({ errors, touched, handleSubmit, isSubmitting }) => (
-          <Form className="mt-8 w-full md:w-1/2 " onSubmit={handleSubmit}>
-            {isSubmitting && <Loading />}
-            {/* {element} */}
-            <Card />
-          </Form>
-        )}
-      </Formik>
-
-      {/* <ReCAPTCHA
-            sitekey={"6Lc0uJ8aAAAAAOCIJEm1YlQzfRiYLb7k-mRyk72h"}
-            onChange={onChange}
-            //ref={this._reCaptchaRef}
-            //asyncScriptOnLoad={this.asyncScriptOnLoad}
-          />
+              }, 300);
+            }}
+          >
+            {({ errors, touched, handleSubmit, isSubmitting }) => (
+              <Form className="w-full" onSubmit={handleSubmit}>
+                {/* <Form className="mt-8 w-full md:w-1/2 " onSubmit={handleSubmit}> */}
+                {isSubmitting && <Loading />}
+                {element}
+                {/* <Card /> */}
+              </Form>
+            )}
+          </Formik>
+          <div className="flex justify-center">
+            <ReCAPTCHA
+              sitekey={"6Lc0uJ8aAAAAAOCIJEm1YlQzfRiYLb7k-mRyk72h"}
+              onChange={onChange}
+              //ref={this._reCaptchaRef}
+              //asyncScriptOnLoad={this.asyncScriptOnLoad}
+            />
+          </div>
         </div>
-      </div> */}
+      </div>
     </section>
   );
 };

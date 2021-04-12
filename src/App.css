@@ -19,3 +19,7 @@ input:-webkit-autofill:active {
 ::-webkit-scrollbar {
   display: none;
 } */
+
+.rc-anchor-normal {
+  width: max-content;
+}

@@ -157,17 +157,15 @@ const Card: React.FC<IF> = (props: IF) => {
               <TR>
                 <TD
                   value={
-                    <div>
-                      <div>
-                        testtesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttest!
-                      </div>
-                      <div>
-                        testtesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttest!
-                      </div>
-                      <div>
-                        testtesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttest!
-                      </div>
-                    </div>
+                    // <div>
+                    //   <div>
+                    //     testtesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttest!
+                    //   </div>
+                    //   <div>
+                    //     testtesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttest!
+                    //   </div>
+                    <div>test</div>
+                    // </div>
                   }
                 />
 
@@ -176,20 +174,8 @@ const Card: React.FC<IF> = (props: IF) => {
                 <TD value={<div>body</div>} />
                 <TD value={<div>body</div>} />
                 <TD value={<div>body</div>} />
-                <TD
-                  value={
-                    <div>
-                      bodybodybodybodybodybodybodybodybodybodybodybodybodybodybodybodybodybodybody
-                    </div>
-                  }
-                />
-                <TD
-                  value={
-                    <div>
-                      bodybodybodybodybodybodybodybodybodybodybodybodybodybodybodybodybodybodybodybodybodybodybodybodybodybodybodybodybodybodybodybodybodybodybodybodybodybodybodybodybodybodybodybodybodybodybodybodybodybodybodybodybodybodybodybodybody
-                    </div>
-                  }
-                />
+                <TD value={<div>body </div>} />
+                <TD value={<div>body</div>} />
               </TR>
             </TbodyWrapper>
           </Table>

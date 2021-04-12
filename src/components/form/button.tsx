@@ -101,10 +101,11 @@ Button.defaultProps = {
   type: "button",
   color: "white",
   // design: "contained",
-  size: "sm",
+  size: "full",
   disabled: null,
   textTransform: "uppercase",
   bgColor: "primary",
+  rounded: "base",
 };
 
 export default Button;
