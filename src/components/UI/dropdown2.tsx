@@ -1,7 +1,9 @@
 import React, { ReactChild, ReactNode, ReactChildren } from "react";
 import styled from "styled-components";
 
-export const MenuDepthed = styled.li`
+export const DropdownDepthedList = styled.li.attrs({
+  className: "rounded-sm relative px-3 py-1 hover:bg-gray-100",
+})`
   & > ul {
     transform: translatex(100%) scale(0);
   }
@@ -40,8 +42,7 @@ const DropDown2: React.FC<IF> = (props: IF) => {
         <span className="pr-1 font-semibold flex-1">Dropdown</span>
         <span>
           <svg
-            className="fill-current h-4 w-4 transform group-hover:-rotate-180
-  transition duration-150 ease-in-out"
+            className="fill-current h-4 w-4 transform group-hover:-rotate-180 transition duration-150 ease-in-out"
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 20 20"
           >
@@ -49,14 +50,11 @@ const DropDown2: React.FC<IF> = (props: IF) => {
           </svg>
         </span>
       </button>
-      <ul
-        className="bg-white border rounded-sm transform scale-0 group-hover:scale-100 absolute 
-transition duration-150 ease-in-out origin-top min-w-32"
-      >
+      <ul className="bg-white border rounded-sm transform scale-0 group-hover:scale-100 absolute transition duration-150 ease-in-out origin-top min-w-32">
         <DropdownList label="Programming" />
         <DropdownList label="DevOps" />
 
-        <MenuDepthed className="rounded-sm relative px-3 py-1 hover:bg-gray-100">
+        <DropdownDepthedList>
           <button className="w-full text-left flex items-center outline-none focus:outline-none">
             <span className="pr-1 flex-1">Langauges</span>
             <span className="mr-auto">
@@ -78,7 +76,7 @@ min-w-32
           >
             <DropdownList label="Javascript" />
 
-            <DropdownList>
+            <DropdownDepthedList>
               <button className="w-full text-left flex items-center outline-none focus:outline-none">
                 <span className="pr-1 flex-1">Python</span>
                 <span className="mr-auto">
@@ -101,11 +99,12 @@ min-w-32
                 <DropdownList label="2.7" />
                 <DropdownList label="3+" />
               </ul>
-            </DropdownList>
+            </DropdownDepthedList>
+
             <DropdownList label="Go" />
             <DropdownList label="Rust" />
           </ul>
-        </MenuDepthed>
+        </DropdownDepthedList>
 
         <DropdownList>
           <div className="grid grid-cols-2">
