@@ -6,6 +6,7 @@ import {
   COLOR_VARIANT_MAPS,
   DISABLED_VARIANT_MAPS,
   ROUNDED_VARIANT_MAPS,
+  FONT_SIZE_VARIANT_MAPS,
 } from "../../assets/styles/tailwindCommon";
 
 const BGCOLOR_VARIANT_MAPS = {
@@ -45,13 +46,35 @@ interface ButtonProps {
   bgColor?: "primary" | "secondary" | "danger" | "transparent" | "white";
   design?: "contained" | "text" | "outlined" | "withIcon";
   size?: "auto" | "sm" | "md" | "lg" | "full";
+  textsize?:
+    | "sm"
+    | "base"
+    | "lg"
+    | "xl"
+    | "2xl"
+    | "3xl"
+    | "4xl"
+    | "5xl"
+    | "6xl"
+    | "7xl"
+    | "8xl"
+    | "9xl";
   disabled?: "true" | null;
   textTransform?: "uppercase" | "capitalize" | "lowercase";
   href?: string;
   children?: React.ReactNode | React.FC | ReactChildren | string;
   onClick?: () => void;
   icon?: string;
-  rounded?: "none" | "base" | "sm" | "md" | "lg";
+  rounded?:
+    | "none"
+    | "base"
+    | "sm"
+    | "md"
+    | "lg"
+    | "xl"
+    | "2xl"
+    | "3xl"
+    | "full";
   customstyle?: string;
 }
 
@@ -67,6 +90,7 @@ const Button: React.FC<ButtonProps> = (props: ButtonProps) => {
           ${SIZE_VARIANT_MAPS[props.size]}
           ${props.disabled && DISABLED_VARIANT_MAPS["button"]}
           ${TEXT_TRANSFORM_VARIANT_MAPS[props.textTransform]}  
+          ${FONT_SIZE_VARIANT_MAPS[props.textsize]}
           ${ROUNDED_VARIANT_MAPS[props.rounded]}  
           ${props.customstyle && props.customstyle}
           `}
@@ -86,6 +110,7 @@ const Button: React.FC<ButtonProps> = (props: ButtonProps) => {
        ${SIZE_VARIANT_MAPS[props.size]}
        ${props.disabled && DISABLED_VARIANT_MAPS["button"]}
        ${TEXT_TRANSFORM_VARIANT_MAPS[props.textTransform]}  
+       ${FONT_SIZE_VARIANT_MAPS[props.textsize]}
        ${ROUNDED_VARIANT_MAPS[props.rounded]}  
        ${props.customstyle && props.customstyle}
 

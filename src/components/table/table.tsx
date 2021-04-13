@@ -4,60 +4,66 @@ import styled, { css } from "styled-components";
 
 // CSS
 // TODO: CSS 파일 나누기
+// TODO: responsive(밑으로 내려가는거), default(그냥 스크롤로)로 나누기
 const TableWrapper = styled.table.attrs((props: any) => ({
   className:
-    "mb-4 w-full overflow-hidden divide-y divide-gray-200 shadow border-b border-gray-200 sm:rounded-lg bg-white ",
+    "sm:inline-table w-full flex flex-row flex-no-wrap sm:bg-white sm:rounded-lg overflow-hidden sm:shadow-lg my-5",
 }))<any>``;
 
+/* <table class="w-full flex flex-row flex-no-wrap sm:bg-white rounded-lg overflow-hidden sm:shadow-lg my-5"> */
+// "mb-4 w-full overflow-hidden divide-y divide-gray-200 shadow border-b border-gray-200 sm:rounded-lg bg-white ",
+
 const ThWrapper = styled.th.attrs({
-  className:
-    "px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider ",
-})``;
+  className: "p-4 text-left text-gray-500 uppercase sm:border-none",
+})`
+  @media (max-width: 640px) {
+    &:not(:last-child) {
+      border-bottom: 1px rgb(229, 231, 235) solid;
+    }
+  }
+`;
+/*
+text-xs font-medium tracking-wider 
+*/
+
 const TrWrapper = styled.tr.attrs({
-  className: "w-full border-b border-gray-200",
+  className:
+    "bg-indigo-100 flex flex-col flex-no wrap sm:table-row mb-2 sm:mb-0",
 })``;
 
-// const TDWrapper = styled.td.attrs((props: any) => ({
-//   className: "px-6 py-4 whitespace-nowrap border-b border-gray-200",
-// }))<any>`
-//   & {
-//     > div {
-//       /* ${tw`text-sm text-gray-900 whitespace-nowrap overflow-ellipsis overflow-hidden`} */
-//       white-space: nowrap;
-//       overflow: hidden;
-//       text-overflow: ellipsis;
-//       font-size: 0.875rem;
-//       line-height: 1.25rem;
-//       /* float: ${props.align}; */
-//     }
-//   }
-// `;
+/* <tr class="bg-teal-400 flex flex-col flex-no wrap sm:table-row rounded-l-lg sm:rounded-none mb-2 sm:mb-0"> */
 
 const TDWrapper = styled.td<any>`
   white-space: nowrap;
-  padding: 1em 1.5rem;
-  border-bottom: 1px rgb(229, 231, 235) solid;
+  padding: 1rem;
   max-width: ${(props) => props.maxwidth};
-
+  background-color: white;
   & > div {
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
-    font-size: 0.875rem;
-    line-height: 1.25rem;
-    /* background: ${(props) => (props.color ? props.color : "yellow")}; */
     float: ${(props) => props.align && props.align};
-    /* max-width: ${(props) => props.maxwidth}; */
+  }
+
+  @media (max-width: 640px) {
+    &:not(:last-child) {
+      border-bottom: 1px rgb(229, 231, 235) solid;
+    }
   }
 `;
 
 export const TbodyWrapper = styled.tbody.attrs({
-  className: "bg-white divide-y divide-gray-200",
+  className: "sm:divide-y sm:divide-gray-200",
 })``;
 
 export const TheadWrapper = styled.thead<any>`
-  background-color: rgba(249, 250, 251, 1);
-  ${(props: any) => props.bgColor && `background-color: ${props.bgColor}`};
+  //${(props: any) => props.bgColor && `background-color: ${props.bgColor}`};
+
+  @media (min-width: 640px) {
+    & > tr:not(:first-child) {
+      display: none;
+    }
+  }
 `;
 /* ${(props: any) => props.color && `color: ${props.color}`}; */
 

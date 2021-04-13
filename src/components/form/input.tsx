@@ -85,22 +85,11 @@ const InputTextSearchBar = styled.div`
   padding: 0 1rem;
   transform-origin: top left;
   transition: all 0.2s ease-out;
-  width: auto;
+  width: 10rem;
   height: 2.2rem;
 
   &:focus-within {
-    /* &:focus-within:not(.searchIcon) { */
-    transform: scaleX(1.3);
-
-    //TODO: 나중에 더 수정하기
-    /* .searchIcon { */
-    & > button {
-      transform: scaleX(0.85);
-    }
-
-    & > input {
-      font-size: 16px;
-    }
+    width: 20rem;
 
     & > .autoComplete {
       display: block;
@@ -226,7 +215,9 @@ const SliderWrapper = styled.div`
 `;
 
 // 에러 메시지 출력 div
-const ErrorDivWrapper = styled.div.attrs({ className: classNames`` })``;
+const ErrorDivWrapper = styled.div.attrs({
+  className: classNames`ml-1 text-red-500 text-sm	mt-1`,
+})``;
 
 /* styled components ends */
 
@@ -382,14 +373,12 @@ export const Input: React.FC<InputTextProps> = (props: InputTextProps) => {
       return (
         // 일반 인풋일 경우
         // <div className={`w-full`}>
-        <div
-          className={classNames`flex flex-col capitalize 
-          // ${FIELD_SIZE_VARIANT_MAPS[props.fieldsize]}
-          ${props.customstyle && props.customstyle}`}
-        >
+        <div className={classNames`flex flex-col capitalize mb-2`}>
           <label
             className={
-              props.nolabel ? `sr-only` : `mb-2 ml-1 ${props.labelcustomstyle}`
+              props.nolabel
+                ? `sr-only`
+                : classNames`mb-2 ml-1 ${props.labelcustomstyle}`
             }
           >
             {props.label}
@@ -398,6 +387,7 @@ export const Input: React.FC<InputTextProps> = (props: InputTextProps) => {
             className={
               // props.disabled              ? `${DISALBED_INPUT}`              :
               classNames`form-input border
+              ${error && touched && `border-red-500 border-4`}
               ${FIELD_SIZE_VARIANT_MAPS[props.fieldsize]}
               ${COLOR_VARIANT_MAPS[props.color]}
               ${TEXT_TRANSFORM_VARIANT_MAPS[props.texttransform]}
@@ -406,14 +396,13 @@ export const Input: React.FC<InputTextProps> = (props: InputTextProps) => {
               ${BGCOLOR_VARIANT_MAPS[props.bgcolor]}
               ${FONT_SIZE_VARIANT_MAPS[props.textsize]}
               ${ROUND_VARIANT_MAPS[props.rounded]}
-              // ${props.customstyle && props.customstyle}
               ${props.disabled && DISABLED_VARIANT_MAPS["text"]}
               `
             }
             {...field}
             {...props}
           />
-          {error && touched && <div className={``}>{error}</div>}
+          {error && touched && <ErrorDivWrapper>{error}</ErrorDivWrapper>}
         </div>
       );
   }
@@ -467,6 +456,43 @@ export const Checkbox: React.FC<CheckboxProps> = ({ children, ...props }) => {
         {children}
       </label>
       {meta.touched && meta.error ? <div className="error"></div> : null}
+    </div>
+  );
+};
+
+////****************************** */
+// toggle slider(button)
+////****************************** */
+
+const ToggleWrapper = styled.input.attrs((props: any) => ({
+  className: classNames`appearance-none transition-colors cursor-pointer w-14 h-7 rounded-full focus:outline-none bg-red-500`,
+}))<any>`
+  &:checked {
+    ${tw`bg-green-500`}
+  }
+
+  &:checked ~ span:last-child {
+    ${tw`translate-x-8`}
+  }
+`;
+
+export const Toggle: React.FC<CheckboxProps> = ({ children, ...props }) => {
+  const [field, meta] = useField({
+    name: props.name,
+  });
+
+  return (
+    <div className={`inline-flex flex-col`}>
+      <label className="flex items-center relative w-max cursor-pointer select-none">
+        <ToggleWrapper type="checkbox" {...field} {...props} />
+        <span className="absolute font-medium text-xs uppercase right-1 text-white">
+          OFF
+        </span>
+        <span className="absolute font-medium text-xs uppercase right-8 text-white">
+          ON
+        </span>
+        <span className="w-7 h-7 right-8 absolute rounded-full transform transition-transform bg-gray-200"></span>
+      </label>
     </div>
   );
 };

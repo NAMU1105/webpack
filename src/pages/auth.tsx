@@ -247,9 +247,16 @@ const Auth: React.FC<IF> = (props: IF) => {
                 {isSubmitting && <Loading />}
                 {element}
                 {/* <Card /> */}
+                {/* <Input
+                  inputtype="searchBar"
+                  type="text"
+                  label="search"
+                  name="search"
+                /> */}
               </Form>
             )}
           </Formik>
+
           <div className="flex justify-center">
             <ReCAPTCHA
               sitekey={"6Lc0uJ8aAAAAAOCIJEm1YlQzfRiYLb7k-mRyk72h"}
