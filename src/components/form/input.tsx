@@ -248,6 +248,11 @@ export const Input: React.FC<InputTextProps> = (props: InputTextProps) => {
     name: props.name,
   });
 
+  // TODO: maxLength넘기면 다음 인풋에 포커스 주기
+  const checkInputLength = (e: React.ChangeEvent<HTMLInputElement>) => {
+    // console.log(e.target.value.length);
+  };
+
   switch (props.inputtype) {
     // 2. textArea일 경우
     case "textarea":
@@ -384,9 +389,7 @@ export const Input: React.FC<InputTextProps> = (props: InputTextProps) => {
             {props.label}
           </label>
           <input
-            className={
-              // props.disabled              ? `${DISALBED_INPUT}`              :
-              classNames`form-input border
+            className={classNames`form-input border
               ${error && touched && `border-red-500 border-4`}
               ${FIELD_SIZE_VARIANT_MAPS[props.fieldsize]}
               ${COLOR_VARIANT_MAPS[props.color]}
@@ -397,10 +400,20 @@ export const Input: React.FC<InputTextProps> = (props: InputTextProps) => {
               ${FONT_SIZE_VARIANT_MAPS[props.textsize]}
               ${ROUND_VARIANT_MAPS[props.rounded]}
               ${props.disabled && DISABLED_VARIANT_MAPS["text"]}
-              `
-            }
+              `}
             {...field}
             {...props}
+            // onBlur={(e) => {
+            //   console.log(e.target.value);
+            //   //field.value = "test";
+            // }}
+            // onChange={(e) => {
+            //   console.log(e.target.value);
+            // }}
+            onChange={(e) => {
+              checkInputLength(e);
+              //   setFieldValue("");
+            }}
           />
           {error && touched && <ErrorDivWrapper>{error}</ErrorDivWrapper>}
         </div>

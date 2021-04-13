@@ -46,9 +46,16 @@ const Auth: React.FC<IF> = (props: IF) => {
   const [title, setTitle] = useState<string>("Admin login");
   // const [validation, setTitle] = useState<string>("Admin login");
 
-  function onChange(value: string) {
-    console.log("Captcha value:", value);
-  }
+  // function onChange(value: string) {
+  //   console.log("Captcha value:", value);
+  // }
+
+  const onEmailChange = (
+    e: React.ChangeEvent<HTMLInputElement>,
+    setFieldValue: (field: string, value: any, shouldValidate?: boolean) => void
+  ) => {
+    setFieldValue("testtest", "testtest");
+  };
 
   useEffect(() => {
     console.log(authMode);
@@ -130,13 +137,6 @@ const Auth: React.FC<IF> = (props: IF) => {
               label="email"
               placeholder="email"
             />
-
-            {/* <Input
-              type="text"
-              name="captcha"
-              label="captcha"
-              placeholder="captcha"
-            /> */}
 
             <div className="flex justify-between items-center mt-4">
               <Button size="sm" type="submit" bgColor="white" color="black">
@@ -224,6 +224,8 @@ const Auth: React.FC<IF> = (props: IF) => {
           <Formik
             initialValues={{
               searchType: "",
+              email: "",
+              testtest: "",
             }}
             validationSchema={LoginSchema}
             onSubmit={(values, { setSubmitting }) => {
@@ -240,9 +242,22 @@ const Auth: React.FC<IF> = (props: IF) => {
                  * **/
               }, 300);
             }}
+
+            //  handleChange={e => console.log("bluuuuurr", { e })}
           >
-            {({ errors, touched, handleSubmit, isSubmitting }) => (
-              <Form className="w-full" onSubmit={handleSubmit}>
+            {({
+              errors,
+              touched,
+              handleSubmit,
+              isSubmitting,
+              handleChange,
+              setFieldValue,
+            }) => (
+              <Form
+                className="w-full"
+                onSubmit={handleSubmit}
+                onChange={handleChange}
+              >
                 {/* <Form className="mt-8 w-full md:w-1/2 " onSubmit={handleSubmit}> */}
                 {isSubmitting && <Loading />}
                 {element}
@@ -253,6 +268,26 @@ const Auth: React.FC<IF> = (props: IF) => {
                   label="search"
                   name="search"
                 /> */}
+                {/* <input
+                  type="email"
+                  name="testtest"
+                  id="testtest"
+                  onChange={(e) => {
+                    setFieldValue("testtest", "~!!");
+                    onEmailChange(e, setFieldValue);
+
+                    // setFieldValue("search", "");
+                    // console.log(e.target.value);
+                  }}
+                  // onBlur={(e) => {
+                  //   setFieldValue("testtest", "~!!");
+                  // }}
+
+                  // onBlur={(e) => {
+                  //   setFieldValue("search", "null");
+                  //   // console.log(e.target.value);
+                  // }}
+                /> */}
               </Form>
             )}
           </Formik>
@@ -260,7 +295,7 @@ const Auth: React.FC<IF> = (props: IF) => {
           <div className="flex justify-center">
             <ReCAPTCHA
               sitekey={"6Lc0uJ8aAAAAAOCIJEm1YlQzfRiYLb7k-mRyk72h"}
-              onChange={onChange}
+              // onChange={onChange}
               //ref={this._reCaptchaRef}
               //asyncScriptOnLoad={this.asyncScriptOnLoad}
             />
