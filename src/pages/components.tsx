@@ -1,16 +1,26 @@
 import React, { useRef, useEffect, useState } from "react";
 import { Formik, Form } from "formik";
 import styled from "styled-components";
+import * as chartjs from "react-chartjs-2";
+// import { Bubble } from "react-chartjs-2";
+
 import Button from "../components/form/button";
 import DropDown2, {
   DropdownDepthedList,
   DropdownList,
 } from "../components/UI/dropdown2";
 import { Table, TH, TR, TD } from "../../src/components/table/table";
-import { TheadWrapper, TbodyWrapper } from "../../src/components/table/table";
+import {
+  TableTotal,
+  TheadWrapper,
+  TbodyWrapper,
+} from "../../src/components/table/table";
 
 import Pagination from "../../src/components/navigation/pagination";
 import { Toggle } from "../components/form/input";
+import * as CHART_DATA from "../../src/utils/chartsDummyData";
+
+// mount여부를 알려주는 변수
 let mounted = false;
 
 interface IF {}
@@ -20,21 +30,35 @@ const Loader = styled.div`
 `;
 
 const Components: React.FC<IF> = (props: IF) => {
-  const tdRef = useRef(null);
-  const [thHeight, setThHeight] = useState<string>("");
+  // const tdRef = useRef(null);
+  // const [thHeight, setThHeight] = useState<string>("");
 
-  useEffect(() => {
-    if (!mounted) mounted = true;
-    if (mounted) {
-      const rect = tdRef.current.getBoundingClientRect();
-      console.log(rect.height);
-      console.log(tdRef.current);
-      setThHeight(`${rect.height}px`);
-    }
-  }, []);
+  // useEffect(() => {
+  //   if (!mounted) mounted = true;
+  //   if (mounted) {
+  //     const rect = tdRef.current.getBoundingClientRect();
+  //     console.log(rect.height);
+  //     console.log(tdRef.current);
+  //     setThHeight(`${rect.height}px`);
+  //   }
+  // }, []);
 
   return (
     <section>
+      //
+      {/* 0. charts */}
+      <article className="charts">
+        <h1>CHARTS</h1>
+        <div className="">
+          <chartjs.Bubble
+            data={CHART_DATA.BUBBLE_DATA}
+            //width={100}
+            //height={100}
+            options={CHART_DATA.BUBBLE_OPTION}
+          />
+          <chartjs.Bar data={CHART_DATA.MIXED_DATA} />
+        </div>
+      </article>
       {/* 1. button */}
       <article className="button">
         <h1>buttons</h1>
@@ -65,7 +89,6 @@ const Components: React.FC<IF> = (props: IF) => {
           BIG TEXT SIZE
         </Button>
       </article>
-
       <article className="dropdowns">
         <h1>dropdowns</h1>
         <DropDown2
@@ -162,79 +185,69 @@ min-w-32
           </DropdownList>
         </DropDown2>
       </article>
+      {/* tables */}
       <article className="tables">
-        <h1>Table</h1>
-        <Table>
-          <TheadWrapper>
-            <TR>
-              <TH>test1</TH>
-              <TH>test2</TH>
-              <TH>test3</TH>
-              <TH height={thHeight}>승인</TH>
-              {/* <TH height={tdRef.current.getBoundingClientRect()}>승인</TH> */}
-            </TR>
-            <TR>
-              <TH>test1</TH>
-              <TH>test2</TH>
-              <TH>test3</TH>
-              <TH height={thHeight}>승인</TH>
-            </TR>
-            <TR>
-              <TH>test1</TH>
-              <TH>test2</TH>
-              <TH>test3</TH>
-              <TH height={thHeight}>승인</TH>
-            </TR>
-          </TheadWrapper>
-          <TbodyWrapper>
-            <TR>
-              <TD value={<div>body</div>} />
-              <TD value={<div>body</div>} />
-              <TD value={<div>body</div>} />
-              <TD
-                innerRef={tdRef}
-                value={
-                  <div className="flex flex-col">
-                    <Button size="auto">accept</Button>
-                    <Button size="auto" bgColor="danger">
-                      block
-                    </Button>
-                  </div>
-                }
-              />
-            </TR>
-            <TR>
-              <TD value={<div>body</div>} />
-              <TD value={<div>body</div>} />
-              <TD value={<div>body</div>} />
-              <TD
-                value={
-                  <div className="flex flex-col">
-                    <Button size="auto">accept</Button>
-                    <Button size="auto" bgColor="danger">
-                      block
-                    </Button>
-                  </div>
-                }
-              />
-            </TR>
-            <TR>
-              <TD value={<div>body</div>} />
-              <TD value={<div>body</div>} />
-              <TD value={<div>body</div>} />
-              <TD
-                value={
-                  <div className="flex flex-col">
-                    <Button size="auto">accept</Button>
-                    <Button size="auto" bgColor="danger">
-                      block
-                    </Button>
-                  </div>
-                }
-              />
-            </TR>
-          </TbodyWrapper>
-        </Table>
+        <h1>Tables</h1>
+        {/* div -> table, table -> tableWrapper로 바꾸기 */}
+        <TableTotal>
+          <Table>
+            <TheadWrapper first>
+              <TR>
+                <TH>test1</TH>
+                <TH>test2</TH>
+                <TH>test3</TH>
+                <TH>test3</TH>
+              </TR>
+            </TheadWrapper>
+            <TbodyWrapper>
+              <TR>
+                <TD value={<div>body</div>} />
+                <TD value={<div>body</div>} />
+                <TD value={<div>body</div>} />
+                <TD
+                  // innerRef={tdRef}
+                  value={
+                    <div className="flex flex-col">
+                      <Button size="auto">accept</Button>
+                      <Button size="auto" bgColor="danger">
+                        block
+                      </Button>
+                    </div>
+                  }
+                />
+              </TR>
+            </TbodyWrapper>
+          </Table>
+          <Table>
+            <TheadWrapper>
+              <TR>
+                <TH>test1</TH>
+                <TH>test2</TH>
+                <TH>test3</TH>
+                <TH>test3</TH>
+                {/* <TH height={thHeight}>승인</TH> */}
+              </TR>
+            </TheadWrapper>
+            <TbodyWrapper>
+              <TR>
+                <TD value={<div>body</div>} />
+                <TD value={<div>body</div>} />
+                <TD value={<div>body</div>} />
+                <TD
+                  // innerRef={tdRef}
+                  value={
+                    <div className="flex flex-col">
+                      <Button size="auto">accept</Button>
+                      <Button size="auto" bgColor="danger">
+                        block
+                      </Button>
+                    </div>
+                  }
+                />
+              </TR>
+            </TbodyWrapper>
+          </Table>
+        </TableTotal>
       </article>
       <article>
         <Formik

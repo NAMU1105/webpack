@@ -6,6 +6,7 @@ module.exports = {
     "./dist/*.html",
     "./src/components/**/*.{js,jsx,ts,tsx}",
     "./src/pages/**/*.{js,jsx,ts,tsx}",
+    "./src/app.tsx",
   ],
   theme: {
     extend: {
@@ -247,7 +248,7 @@ module.exports = {
       ],
       borderRadius: ["checked", "label-checked"],
       boxShadow: ["checked", "label-checked"],
-      display: ["group-focus", "group-hover"],
+      display: ["group-focus", "group-hover", "first"],
     },
   },
   plugins: [

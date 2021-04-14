@@ -41,7 +41,7 @@ interface DropDownProps {
 
 const DropDown2: React.FC<DropDownProps> = (props: DropDownProps) => {
   return (
-    <div className="group inline-block">
+    <div className="group relative inline-block">
       <button className="pl-3 outline-none focus:outline-none flex items-center">
         <span className="font-semibold flex-1">{props.label}</span>
       </button>

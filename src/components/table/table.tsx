@@ -5,13 +5,21 @@ import styled, { css } from "styled-components";
 // CSS
 // TODO: CSS 파일 나누기
 // TODO: responsive(밑으로 내려가는거), default(그냥 스크롤로)로 나누기
+// const TableTotalWrapper = styled.div.attrs((props: any) => ({
+//   className: "",
+// }))<any>`
+//   & > table > thead:not(:first-child) {
+//     display: none;
+//   }
+// `;
+
 const TableWrapper = styled.table.attrs((props: any) => ({
-  className:
-    "sm:inline-table w-full flex flex-row flex-no-wrap sm:bg-white sm:rounded-lg overflow-hidden sm:shadow-lg my-5",
+  className: "flex sm:flex-col  mb-2 sm:mb-0 sm:divide-y  sm:divide-gray-200",
 }))<any>``;
 
 const ThWrapper = styled.th.attrs((props: any) => ({
-  className: "p-4 text-left text-gray-500 uppercase sm:border-none",
+  className:
+    "p-4 text-left text-gray-500 uppercase sm:border-none bg-indigo-100 sm:flex-1",
 }))<any>`
   @media (max-width: 640px) {
     &:not(:last-child) {
@@ -19,21 +27,17 @@ const ThWrapper = styled.th.attrs((props: any) => ({
       height: ${(props) => props.height};
     }
   }
-  /* @media (max-width: 640px) {
-      height: ${(props) => props.height};
-  } */
 `;
 
 const TrWrapper = styled.tr.attrs({
-  className:
-    "bg-indigo-100 flex flex-col flex-no wrap sm:table-row mb-2 sm:mb-0",
+  className: "flex flex-col flex-no wrap sm:flex-row sm:mb-0 ",
 })``;
 
 const TDWrapper = styled.td<any>`
   white-space: nowrap;
   padding: 1rem;
   max-width: ${(props) => props.maxwidth};
-  background-color: white;
+  flex: 1;
   & > div {
     white-space: nowrap;
     overflow: hidden;
@@ -49,19 +53,12 @@ const TDWrapper = styled.td<any>`
 `;
 
 export const TbodyWrapper = styled.tbody.attrs({
-  className: "sm:divide-y sm:divide-gray-200",
+  className: "bg-white sm:divide-y sm:divide-gray-200",
 })``;
 
-export const TheadWrapper = styled.thead<any>`
-  //${(props: any) => props.bgColor && `background-color: ${props.bgColor}`};
-
-  @media (min-width: 640px) {
-    & > tr:not(:first-child) {
-      display: none;
-    }
-  }
-`;
-/* ${(props: any) => props.color && `color: ${props.color}`}; */
+export const TheadWrapper = styled.thead.attrs((props: any) => ({
+  className: `bg-indigo-100 ${!props.first && `block sm:hidden`}`,
+}))<any>``;
 
 //////////// end of css
 
@@ -119,5 +116,11 @@ export const Table: React.FC<WithChildren> = ({ children }: WithChildren) => {
       <TableWrapper>{children}</TableWrapper>
     </>
   );
+};
+export const TableTotal: React.FC<WithChildren> = ({
+  children,
+}: WithChildren) => {
+  return <div>{children}</div>;
+  // return <TableTotalWrapper>{children}</TableTotalWrapper>;
 };
 // export default Table;

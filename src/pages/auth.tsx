@@ -27,9 +27,13 @@ const Captch = styled.div`
   }
 `;
 
-type AuthPaths = {
-  authType: "/login" | "/signup" | "/password" | "/confirm";
-};
+type AuthPaths =
+  | "/login"
+  | "/signup"
+  | "/password"
+  | "/confirm"
+  | null
+  | string;
 
 interface IF {}
 
@@ -41,7 +45,7 @@ const Auth: React.FC<IF> = (props: IF) => {
 
   // const [isLoginMode, setLoginMode] = useState<boolean>(false);
   // 어떤 목적의 페이지인지 보여준다(회원가입/로그인/비밀번호리셋/이메일인증).
-  const [authMode, setAuthMode] = useState<string>();
+  const [authMode, setAuthMode] = useState<AuthPaths>();
   const [element, setElement] = useState<ReactNode>();
   const [title, setTitle] = useState<string>("Admin login");
   // const [validation, setTitle] = useState<string>("Admin login");
