@@ -11,6 +11,8 @@ import { onError } from "@apollo/client/link/error";
 import "./i18n";
 
 import "./app.css";
+// import "./index.scss";
+// import "../src/assets/styles/sass/test.scss";
 
 // Graphql setting
 const requestLink = new HttpLink({

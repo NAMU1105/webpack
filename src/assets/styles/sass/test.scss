@@ -1,0 +1,11 @@
+.SASS {
+  @apply bg-indigo-500;
+
+  color: red;
+  cursor: pointer;
+
+  &:hover {
+    cursor: pointer;
+    color: blue;
+  }
+}

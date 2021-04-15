@@ -94,7 +94,28 @@ module.exports = {
       },
       {
         test: /\.css$/,
-        use: [MiniCssExtractPlugin.loader, "css-loader", "postcss-loader"],
+        use: [
+          MiniCssExtractPlugin.loader,
+          { loader: "css-loader", options: { importLoaders: 1 } },
+          { loader: "postcss-loader" },
+        ],
+      },
+      {
+        //    Extract any SCSS content and minimize
+        test: /\.scss$/,
+        use: [
+          MiniCssExtractPlugin.loader,
+          { loader: "sass-loader", options: { importLoaders: 1 } },
+          {
+            loader: "postcss-loader",
+          },
+          {
+            loader: "sass-loader",
+            options: {
+              plugins: () => [autoprefixer()],
+            },
+          },
+        ],
       },
     ],
   },

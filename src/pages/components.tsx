@@ -19,7 +19,8 @@ import {
 import Pagination from "../../src/components/navigation/pagination";
 import { Toggle } from "../components/form/input";
 import * as CHART_DATA from "../../src/utils/chartsDummyData";
-
+import User from "../components/Users/user";
+import { DUMMY_USERS } from "../../src/utils/UserDummyData";
 // mount여부를 알려주는 변수
 let mounted = false;
 
@@ -45,7 +46,24 @@ const Components: React.FC<IF> = (props: IF) => {
 
   return (
     <section>
-      //
+      <h1 className="SASS">test porfa!!</h1>
+      {/* users */}
+      {DUMMY_USERS.map((user, index) => {
+        return (
+          <User
+            key={index}
+            name={user.name}
+            profile={user.profile}
+            role={user.role}
+            group={user.group}
+            company={user.company}
+            level={user.level}
+            status={user.status}
+            approved={user.approved}
+          />
+        );
+      })}
+
       {/* 0. charts */}
       <article className="charts">
         <h1>CHARTS</h1>

@@ -326,6 +326,19 @@ module.exports = {
       addUtilities(loadingUtilities, ["after"]);
     }),
 
+    // image-fit 클래스 생성(이미지가 부모요소 크기에 벗어나지 않도록 하는 클래스)
+    plugin(function ({ addComponents }) {
+      const imageFit = {
+        ".image-fit": {
+          "@apply relative": "",
+          "& > img": {
+            "@apply absolute object-cover w-full h-full": "",
+          },
+        },
+      };
+      addComponents(imageFit);
+    }),
+
     // 라디오 인풋 체크하면 그 label값의 css속성을 바꿔주는 variant
     plugin(({ addVariant, e }) => {
       addVariant("label-checked", ({ modifySelectors, separator }) => {

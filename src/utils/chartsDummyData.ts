@@ -1,5 +1,22 @@
 // TODO: 아래 정보들(색상, 툴팁 사용여부 등을 프롭스로 받아서 넘기기)
 
+type ChartData = {
+  lable: string;
+  data: Array<string>;
+};
+
+interface ChartProps {
+  labels: Array<string>;
+  dataset: Array<ChartData>;
+  backgroundcolor?: string;
+  bordercolor?: string;
+  borderwidth?: number;
+}
+interface ChartOptionsProps {
+  maintainAspectRatio?: boolean;
+  labelfontSize?: number;
+}
+
 export const BUBBLE_DATA = {
   labels: ["a", "b", "c"],
   datasets: [
@@ -91,7 +108,7 @@ export const MIXED_DATA = {
       lineTension: 0.1,
       backgroundColor: "#cc6060",
       borderColor: "rgba(75,192,192,1)",
-      borderDash: [],
+      // borderDash: [],
       borderDashOffset: 0.0,
       pointBorderColor: "#020c0c",
       pointBackgroundColor: "#fff",

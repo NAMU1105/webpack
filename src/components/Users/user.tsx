@@ -1,27 +1,37 @@
 import React from "react";
 
-interface IF {}
+export interface UserProps {
+  id?: string;
+  name: string;
+  profile: string;
+  role: string;
+  group: "platform" | "server" | "vision";
+  company: string;
+  level: "super" | "pd" | "viewer";
+  status?: "on" | "off";
+  approved: boolean;
+}
 
-const User: React.FC<IF> = (props: IF) => {
+const User: React.FC<UserProps> = (props: UserProps) => {
   return (
-    <div className="intro-y col-span-12 md:col-span-6">
+    <div className="sassTEst intro-y col-span-12 md:col-span-6">
       <div className="box">
         <div className="flex flex-col lg:flex-row items-center p-5 border-b border-gray-200 dark:border-dark-5">
           <div className="w-24 h-24 lg:w-12 lg:h-12 image-fit lg:mr-1">
             <img
               alt="Icewall Tailwind HTML Admin Template"
               className="rounded-full"
-              src="dist/images/profile-3.jpg"
+              src={props.profile}
             />
           </div>
           <div className="lg:ml-2 lg:mr-auto text-center lg:text-left mt-3 lg:mt-0">
             <a href="" className="font-medium">
-              Leonardo DiCaprio
+              {props.name}
             </a>
-            <div className="text-gray-600 text-xs mt-0.5">
-              Frontend Engineer
-            </div>
+            <div className="text-gray-600 text-xs mt-0.5">{props.role}</div>
           </div>
+
+          {/*
           <div className="flex -ml-2 lg:ml-0 lg:justify-end mt-3 lg:mt-0">
             <a
               href=""
@@ -45,6 +55,7 @@ const User: React.FC<IF> = (props: IF) => {
               <i className="w-3 h-3 fill-current" data-feather="linkedin"></i>
             </a>
           </div>
+          */}
         </div>
 
         <div className="flex flex-wrap lg:flex-nowrap items-center justify-center p-5">
