@@ -1,4 +1,5 @@
-module.exports = {
+module.exports = () => ({
+  // parser: require("postcss-comment"),
   plugins: [
     require("postcss-import"),
     require("tailwindcss")("./tailwind.config.js"),
@@ -6,4 +7,4 @@ module.exports = {
     require("postcss-custom-properties"),
     require("autoprefixer"),
   ],
-};
+});

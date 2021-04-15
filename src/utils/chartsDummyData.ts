@@ -1,8 +1,15 @@
 // TODO: 아래 정보들(색상, 툴팁 사용여부 등을 프롭스로 받아서 넘기기)
+// 근데 아래 있는 애들 내가 정의할 필요 없음, 이미 다 정의 되어있으므로 그냥 가져다가 쓰면 됨...
+// <Chart.ChartData> 이 타입 쓰면 됨
+type BubbleDataType = {
+  x: number;
+  y: number;
+  r: number;
+};
 
 type ChartData = {
   lable: string;
-  data: Array<string>;
+  data: Array<number> | Array<BubbleDataType>;
 };
 
 interface ChartProps {
@@ -11,6 +18,7 @@ interface ChartProps {
   backgroundcolor?: string;
   bordercolor?: string;
   borderwidth?: number;
+  hoverBorderColor?: string;
 }
 interface ChartOptionsProps {
   maintainAspectRatio?: boolean;
@@ -138,4 +146,60 @@ export const MIXED_DATA = {
     },
   ],
   // },
+};
+
+export const RADAR_DATA = {
+  labels: [
+    "Eating",
+    "Drinking",
+    "Sleeping",
+    "Designing",
+    "Coding",
+    "Cycling",
+    "Running",
+  ],
+  datasets: [
+    {
+      label: "Desktops",
+      backgroundColor: "rgba(52, 195, 143, 0.2)",
+      borderColor: "#34c38f",
+      pointBackgroundColor: "#34c38f",
+      pointBorderColor: "#fff",
+      pointHoverBackgroundColor: "#fff",
+      pointHoverBorderColor: "#34c38f",
+      data: [65, 59, 90, 81, 56, 55, 40],
+    },
+    {
+      label: "Tablets",
+      backgroundColor: "rgba(85, 110, 230, 0.2)",
+      borderColor: "#556ee6",
+      pointBackgroundColor: "#556ee6",
+      pointBorderColor: "#fff",
+      pointHoverBackgroundColor: "#fff",
+      pointHoverBorderColor: "#556ee6",
+      data: [28, 48, 40, 19, 96, 27, 100],
+    },
+    {
+      label: "Mobiles",
+      backgroundColor: "rgba(50, 10, 230, 0.2)",
+      borderColor: "#556ee6",
+      pointBackgroundColor: "#556ee6",
+      pointBorderColor: "#fff",
+      pointHoverBackgroundColor: "#fff",
+      pointHoverBorderColor: "#556ee6",
+      data: [91, 96, 27, 100, 100, 78, 50],
+    },
+  ],
+};
+
+export const POLAR_DATA = {
+  datasets: [
+    {
+      data: [11, 16, 7, 18],
+      backgroundColor: ["#f46a6a", "#34c38f", "#f1b44c", "#556ee6"],
+      label: "My dataset", // for legend
+      hoverBorderColor: "#fff",
+    },
+  ],
+  labels: ["Series 1", "Series 2", "Series 3", "Series 4"],
 };

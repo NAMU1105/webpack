@@ -1,5 +1,6 @@
 const defaultTheme = require("tailwindcss/defaultTheme");
 const plugin = require("tailwindcss/plugin");
+const primaryColors = require("@left4code/tw-starter/dist/js/colors");
 
 module.exports = {
   purge: [
@@ -8,6 +9,7 @@ module.exports = {
     "./src/pages/**/*.{js,jsx,ts,tsx}",
     "./src/app.tsx",
   ],
+  darkMode: "class",
   theme: {
     extend: {
       fontFamily: {
@@ -17,6 +19,8 @@ module.exports = {
       colors: {
         // 4D color 선언
         primary: {
+          ...primaryColors.primary,
+          1: "#142E71",
           red: {
             dark: "#800000​",
             DEFAULT: "#C00000",
@@ -59,6 +63,10 @@ module.exports = {
         },
         footer: "#D9D9D9",
         backdrop: "rgba(0, 0, 0, 0.75)",
+        dark: {
+          ...primaryColors.dark,
+          8: "#242b3c",
+        },
       },
 
       textColor: {
@@ -151,7 +159,7 @@ module.exports = {
         1.2: "0.3rem",
         header: "3rem",
         footer: "6rem",
-        content: "calc(100vh - 6rem)",
+        content: "calc(100vh - 3rem)",
         sidenav: "17rem",
         logoHeight: "20px",
         "1/10": "10%",
@@ -168,7 +176,7 @@ module.exports = {
       },
 
       minHeight: {
-        content: "calc(100vh - 6rem)",
+        content: "calc(100vh - 3rem)",
         100: "20rem",
       },
 

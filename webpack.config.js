@@ -6,6 +6,8 @@ const prod = process.env.NODE_ENV === "production";
 const webpack = require("webpack");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const { WebpackManifestPlugin } = require("webpack-manifest-plugin");
+const stripInlineComments = require("postcss-strip-inline-comments");
+const tailwindcss = require("tailwindcss");
 
 module.exports = {
   // production, development, none 3가지의 옵션이 존재
@@ -14,10 +16,10 @@ module.exports = {
   mode: prod ? "production" : "development",
   devtool: prod ? "hidden-source-map" : "eval",
   // 애플리케이션 진입점
-  entry: "./src/index.tsx",
-  // entry: {
-  //   kb: ["babel-polyfill", "./src/index.tsx"],
-  // },
+  // entry: "./src/index.tsx",
+  entry: {
+    kb: ["babel-polyfill", "./src/index.tsx"],
+  },
 
   optimization: {
     splitChunks: {
@@ -93,30 +95,41 @@ module.exports = {
         //  use: ["file-loader"],
       },
       {
-        test: /\.css$/,
+        test: /\.(css|scss|sass)$/,
         use: [
-          MiniCssExtractPlugin.loader,
-          { loader: "css-loader", options: { importLoaders: 1 } },
-          { loader: "postcss-loader" },
-        ],
-      },
-      {
-        //    Extract any SCSS content and minimize
-        test: /\.scss$/,
-        use: [
-          MiniCssExtractPlugin.loader,
-          { loader: "sass-loader", options: { importLoaders: 1 } },
+          //MiniCssExtractPlugin.loader,
           {
-            loader: "postcss-loader",
+            loader: "style-loader",
+          },
+          {
+            loader: "css-loader",
+          },
+          {
+            loader: "postcss-loader", // postcss loader needed for tailwindcss
+            options: {
+              postcssOptions: {
+                ident: "postcss",
+                // plugins: [tailwindcss, autoprefixer],
+              },
+            },
           },
           {
             loader: "sass-loader",
-            options: {
-              plugins: () => [autoprefixer()],
-            },
           },
         ],
       },
+      // {
+      //   test: /\.scss$/,
+      //   use: MiniCssExtractPlugin.extract({
+      //     fallback: "style-loader",
+      //     use: [
+      //       "css-loader",
+      //       "postcss-loader",
+      //       "resolve-url-loader",
+      //       "sass-loader",
+      //     ],
+      //   }),
+      // },
     ],
   },
   // 플러그인

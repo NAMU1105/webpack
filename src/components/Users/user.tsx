@@ -13,8 +13,12 @@ export interface UserProps {
 }
 
 const User: React.FC<UserProps> = (props: UserProps) => {
+  const editUser = (id: string) => {
+    console.log(id);
+  };
+
   return (
-    <div className="sassTEst intro-y col-span-12 md:col-span-6">
+    <div className="intro-y col-span-12 md:col-span-6">
       <div className="box">
         <div className="flex flex-col lg:flex-row items-center p-5 border-b border-gray-200 dark:border-dark-5">
           <div className="w-24 h-24 lg:w-12 lg:h-12 image-fit lg:mr-1">
@@ -72,8 +76,11 @@ const User: React.FC<UserProps> = (props: UserProps) => {
             </div>
           </div>
           <button className="btn btn-primary py-1 px-2 mr-2">Message</button>
-          <button className="btn btn-outline-secondary py-1 px-2">
-            Profile
+          <button
+            className="btn btn-outline-secondary py-1 px-2"
+            onClick={() => editUser(props.name)}
+          >
+            Edit
           </button>
         </div>
       </div>

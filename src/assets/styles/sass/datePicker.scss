@@ -1,0 +1,43 @@
+// 가장 큰 컨테이너 부분
+.react-datepicker {
+  background-color: rgb(41, 49, 69);
+
+  &__triangle,
+  &__header {
+    background-color: rgb(41, 49, 69);
+  }
+
+  &__current-month {
+    color: white;
+  }
+
+  &__navigation {
+    &--previous {
+      border-right-color: white;
+    }
+
+    &--next {
+      border-left-color: white;
+    }
+  }
+
+  &__day {
+    color: white;
+
+    &:hover {
+      background-color: gainsboro;
+      color: black;
+    }
+
+    &-name {
+      color: white;
+    }
+  }
+
+  &__day--selected {
+    background-color: rgb(32, 63, 144);
+  }
+}
+
+//.react-datepicker__day--today {
+//}

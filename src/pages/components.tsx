@@ -1,8 +1,13 @@
-import React, { useRef, useEffect, useState } from "react";
+import React, { useState } from "react";
 import { Formik, Form } from "formik";
 import styled from "styled-components";
 import * as chartjs from "react-chartjs-2";
 // import { Bubble } from "react-chartjs-2";
+import Chart from "chart.js";
+import ReactStars from "react-rating-stars-component";
+import DatePicker, { registerLocale } from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
+import ko from "date-fns/locale/ko";
 
 import Button from "../components/form/button";
 import DropDown2, {
@@ -16,11 +21,9 @@ import {
   TbodyWrapper,
 } from "../../src/components/table/table";
 
-import Pagination from "../../src/components/navigation/pagination";
 import { Toggle } from "../components/form/input";
 import * as CHART_DATA from "../../src/utils/chartsDummyData";
-import User from "../components/Users/user";
-import { DUMMY_USERS } from "../../src/utils/UserDummyData";
+
 // mount여부를 알려주는 변수
 let mounted = false;
 
@@ -31,6 +34,9 @@ const Loader = styled.div`
 `;
 
 const Components: React.FC<IF> = (props: IF) => {
+  const [startDate, setStartDate] = useState(new Date());
+  registerLocale("ko", ko);
+
   // const tdRef = useRef(null);
   // const [thHeight, setThHeight] = useState<string>("");
 
@@ -44,26 +50,32 @@ const Components: React.FC<IF> = (props: IF) => {
   //   }
   // }, []);
 
+  const DATA_TEST: Chart.ChartData = {
+    labels: ["1"],
+    datasets: [
+      { label: "food", data: [65, 40, 49, 60], backgroundColor: "red" },
+    ],
+  };
+
+  const ratingChanged = (newRating: number) => {
+    console.log(newRating);
+  };
+
   return (
     <section>
-      <h1 className="SASS">test porfa!!</h1>
-      {/* users */}
-      {DUMMY_USERS.map((user, index) => {
-        return (
-          <User
-            key={index}
-            name={user.name}
-            profile={user.profile}
-            role={user.role}
-            group={user.group}
-            company={user.company}
-            level={user.level}
-            status={user.status}
-            approved={user.approved}
-          />
-        );
-      })}
+      <DatePicker
+        selected={startDate}
+        onChange={(date: Date) => setStartDate(date)}
+        locale="ko"
+        placeholderText="Weeks start on Monday"
+      />
 
+      <ReactStars
+        count={5}
+        onChange={ratingChanged}
+        size={24}
+        activeColor="#ffd700"
+      />
       {/* 0. charts */}
       <article className="charts">
         <h1>CHARTS</h1>
@@ -75,6 +87,9 @@ const Components: React.FC<IF> = (props: IF) => {
             options={CHART_DATA.BUBBLE_OPTION}
           />
           <chartjs.Bar data={CHART_DATA.MIXED_DATA} />
+          <chartjs.Radar data={CHART_DATA.RADAR_DATA} />
+          <chartjs.Polar data={CHART_DATA.POLAR_DATA} />
+          <chartjs.Line data={DATA_TEST} />
         </div>
       </article>
       {/* 1. button */}

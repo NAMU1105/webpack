@@ -15,26 +15,28 @@ import { Redirect } from "react-router-dom";
 // Authentication related pages
 import Auth from "../pages/auth";
 import Components from "../pages/components";
+import Users from "../pages/users";
 //import ConfirmEmail from "../pages/confirmEmail";
 //import NewPassword from "../pages/newPassword";
 //import Settings from "../pages/setting";
 
-//const userRoutes = [
-//  { path: "/dashboard", component: Dashboard },
-//  { path: "/orders", component: Orders },
-//  { path: "/users", component: Users },
-//  { path: "/users/:userId", component: UserDetail },
-//  { path: "/products", component: Products },
-//  { path: "/posts/new", component: AddPost },
-//  { path: "/products/new", component: AddProduct },
-//
+// const userRoutes = [
+//   { path: "/users", component: Users },
+// //  { path: "/dashboard", component: Dashboard },
+// //  { path: "/orders", component: Orders },
+// //  { path: "/users/:userId", component: UserDetail },
+// //  { path: "/products", component: Products },
+// //  { path: "/posts/new", component: AddPost },
+// //  { path: "/products/new", component: AddProduct },
+
 //  // this route should be at the end of all other routes
 //  { path: "/", exact: true, component: () => <Redirect to="/dashboard" /> },
-//];
+// ];
 
 const authRoutes = [
   { path: ["/login", "/signup", "/password", "/confirm"], component: Auth },
   { path: "/components", component: Components },
+  { path: "/users", component: Users },
   // { path: "/auth", component: Auth },
   // { path: "/confirmEmail", component: ConfirmEmail },
   // { path: "/password", component: NewPassword },
