@@ -1,6 +1,7 @@
 import React from "react";
 import { classNames } from "../../utils/utils";
 
+// TODO: 디자인은 따로 빼고, font-size, 대문자(소문자,capital)여부 등 공통적으로 적용할 수 있는 애들은 따로 빼두기
 // type
 type ButtonSizes = "btn-sm" | "btn-lg";
 type ButtonColors =
@@ -28,62 +29,71 @@ type ButtonRounded =
   | "btn-rounded-warning"
   | "btn-rounded-danger";
 
-type ButtonElevatedRounded = "btn-elevated-rounded" | "btn-" | "btn-";
+type ButtonElevatedRounded =
+  | "btn-elevated-rounded"
+  | "btn-elevated-rounded-primary"
+  | "btn-elevated-rounded-secondary"
+  | "btn-elevated-rounded-success"
+  | "btn-elevated-rounded-warning"
+  | "btn-elevated-rounded-danger"
+  | "btn-elevated-rounded-primary"
+  | "btn-elevated-rounded-dark";
 
-// 그냥 아래처럼 다 때려박는 경우도 있다
-// type ButtonTotal = ButtonSizes & ButtonColors & ButtonElevated & ButtonRounded;
+type ButtonOutline =
+  | "btn-outline-primary"
+  | "btn-outline-secondary"
+  | "btn-outline-success"
+  | "btn-outline-warning"
+  | "btn-outline-danger"
+  | "btn-outline-dark";
 
-//---------------------------------------------------------------------------
-// 아!!!! Record<ButtonTotal, string>여기 뒤에 string대신 타입같은걸 넣으면 되는거구나!
-// interface ButtonProps {
-//   styletype?:
-//     | "Sizes"
-//     | "Colors"
-//     | "Elevated"
-//     | "Rounded"
-//     | "Elevated Rounded"
-//     | "Outline"
-//     | "Soft Colors";
-//   children: Text | string | ReactNode | ReactChild | ReactChildren;
-// }
-// const nav: Record<CLASS, PageInfo> = {
-//   classname: { color: "btn-dark", round: "btn-rounded-success" },
-// };
-// enum ButtonStype {
-//   "Sizes",
-//   "Colors",
-//   "Elevated",
-//   "Rounded",
-//   "ElevatedRounded",
-//   "Outline",
-//   "SoftColors",
-// }
-// type ButtonProps =
-//   | "Sizes"
-//   | "Colors"
-//   | "Elevated"
-//   | "Rounded"
-//   | "ElevatedRounded"
-//   | "Outline"
-//   | "SoftColors";
+type ButtonSoft =
+  | "btn-primary-soft"
+  | "btn-secondary-soft"
+  | "btn-success-soft"
+  | "btn-warning-soft"
+  | "btn-danger-soft"
+  | "btn-dark-soft";
 
-type ButtonInfo = {
+interface ButtonInfo {
+  href?: string;
+  type?: "button" | "submit";
   size?: ButtonSizes;
   color?: ButtonColors;
   elevated?: ButtonElevated;
   round?: ButtonRounded;
   elevatedrounded?: ButtonElevatedRounded;
+  outline?: ButtonOutline;
+  soft?: ButtonSoft;
+}
+
+const Button2: React.FC<ButtonInfo & WithChildren & Onclick> = (
+  props: ButtonInfo & WithChildren & Onclick
+) => {
+  if (props.href) {
+    return (
+      <a
+        href={props.href}
+        className={classNames`btn ${props.size} ${props.color} ${props.elevated} ${props.round} ${props.elevatedrounded} ${props.outline} ${props.soft}`}
+      >
+        {props.children}
+      </a>
+    );
+  } else {
+    return (
+      <button
+        type={props.type || "button"}
+        onClick={props.onClick}
+        className={classNames`btn ${props.size} ${props.color} ${props.elevated} ${props.round} ${props.elevatedrounded} ${props.outline} ${props.soft}`}
+      >
+        {props.children}
+      </button>
+    );
+  }
 };
 
-// interface ButtonFilledProps {}
-const Button2: React.FC<ButtonInfo & WithChildren> = (
-  props: ButtonInfo & WithChildren
-) => {
-  return (
-    <button className={classNames`btn ${props.color} ${props.round}`}>
-      {props.children}
-    </button>
-  );
+Button2.defaultProps = {
+  color: "btn-primary",
 };
 
 export default Button2;

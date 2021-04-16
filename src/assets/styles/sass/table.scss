@@ -1,0 +1,90 @@
+.table_wrapper {
+  @apply w-full;
+}
+
+.table_flex {
+  @apply w-full flex flex-row sm:flex-col  mb-2 sm:mb-0 sm:divide-y  sm:divide-gray-200 rounded-md overflow-hidden;
+}
+
+.thead {
+  @apply bg-indigo-100 text-gray-500;
+
+  // colors
+  &-primary {
+    @apply bg-primary-1 text-white;
+  }
+  &-secondary {
+    @apply bg-gray-200;
+  }
+  &-lightblue {
+    @apply bg-indigo-100;
+  }
+  &-transparent {
+    @apply bg-transparent;
+  }
+}
+
+.tbody {
+  @apply bg-white sm:divide-y sm:divide-gray-200;
+
+  &-primary {
+    @apply bg-primary-1;
+  }
+
+  &-secondary {
+    @apply bg-gray-200;
+  }
+
+  &-transparent {
+    @apply bg-transparent;
+  }
+
+  &-white {
+    @apply bg-white;
+  }
+}
+
+.tr {
+  @apply flex flex-col flex-nowrap sm:flex-row sm:mb-0 rounded-md overflow-hidden;
+  &-primary {
+    @apply bg-primary-1;
+  }
+  &-secondary {
+    @apply bg-gray-200;
+  }
+  &-lightblue {
+    @apply bg-indigo-100;
+  }
+  &-transparent {
+    @apply bg-transparent;
+  }
+}
+
+.th {
+  @apply p-4 text-left uppercase sm:border-none sm:flex-1;
+
+  //@media (max-width: 640px) {
+  //  @include media-breakpoint-down(sm) {
+  //    &:not(:last-child) {
+  //      border-bottom: 1px rgb(229, 231, 235) solid;
+  //    }
+  //  }
+}
+
+.td {
+  white-space: nowrap;
+  padding: 1rem;
+  flex: 1;
+  & > div {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  //  @media (max-width: 640px) {
+  //@include media-breakpoint-down(sm) {
+  //  &:not(:last-child) {
+  //    border-bottom: 1px rgb(229, 231, 235) solid;
+  //  }
+  //}
+}

@@ -5,3 +5,7 @@ interface WithChildren {
   // * ReactPortal | boolean | null | undefined ) 로 정의되어 있습니다.
   children?: React.ReactNode | React.FC | ReactChildren;
 }
+
+interface Onclick {
+  onClick?: () => void;
+}

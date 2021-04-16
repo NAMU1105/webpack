@@ -67,7 +67,7 @@ const Components: React.FC<IF> = (props: IF) => {
       {/* <Button2 cn={color:""}>test</Button2> */}
       {/* <Button2 variant={cn:{color:""}}>test</Button2> */}
       {/* <Button2 variant={cn:{color:"test", round: "test"}}>test</Button2> */}
-      <Button2 color="btn-dark">test</Button2>
+      <Button2 outline="btn-outline-primary">test</Button2>
       <DatePicker
         selected={startDate}
         onChange={(date: Date) => setStartDate(date)}
@@ -226,10 +226,9 @@ min-w-32
       {/* tables */}
       <article className="tables">
         <h1>Tables</h1>
-        {/* div -> table, table -> tableWrapper로 바꾸기 */}
         <TableTotal>
           <Table>
-            <TheadWrapper first>
+            <TheadWrapper first color="thead-primary">
               <TR>
                 <TH>test1</TH>
                 <TH>test2</TH>
@@ -238,7 +237,7 @@ min-w-32
               </TR>
             </TheadWrapper>
             <TbodyWrapper>
-              <TR>
+              <TR color="tr-secondary">
                 <TD value={<div>body</div>} />
                 <TD value={<div>body</div>} />
                 <TD value={<div>body</div>} />
