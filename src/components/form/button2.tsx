@@ -1,14 +1,6 @@
-import React, { ReactChild, ReactChildren, ReactNode } from "react";
+import React from "react";
 import { classNames } from "../../utils/utils";
-enum ButtonStype {
-  "Sizes",
-  "Colors",
-  "Elevated",
-  "Rounded",
-  "Elevated Rounded",
-  "Outline",
-  "Soft Colors",
-}
+
 // type
 type ButtonSizes = "btn-sm" | "btn-lg";
 type ButtonColors =
@@ -27,41 +19,60 @@ type ButtonElevated =
   | "btn-elevated-danger"
   | "btn-elevated-dark";
 
-export type ButtonRounded =
+type ButtonRounded =
   | "btn-rounded"
   | "btn-rounded-primary"
   | "btn-rounded-secondary"
   | "btn-rounded-secondary"
   | "btn-rounded-success"
   | "btn-rounded-warning"
-  | "btn-rounded-danger"
-  | "btn-"
-  | "btn-"
-  | "btn-";
+  | "btn-rounded-danger";
 
-// 그냥 아래처럼 다 때려박는 경우
-type ButtonTotal = ButtonSizes & ButtonColors & ButtonElevated & ButtonRounded;
+type ButtonElevatedRounded = "btn-elevated-rounded" | "btn-" | "btn-";
+
+// 그냥 아래처럼 다 때려박는 경우도 있다
+// type ButtonTotal = ButtonSizes & ButtonColors & ButtonElevated & ButtonRounded;
 
 //---------------------------------------------------------------------------
 // 아!!!! Record<ButtonTotal, string>여기 뒤에 string대신 타입같은걸 넣으면 되는거구나!
-interface ButtonProps {
-  styletype?:
-    | "Sizes"
-    | "Colors"
-    | "Elevated"
-    | "Rounded"
-    | "Elevated Rounded"
-    | "Outline"
-    | "Soft Colors";
-  children: Text | string | ReactNode | ReactChild | ReactChildren;
-}
+// interface ButtonProps {
+//   styletype?:
+//     | "Sizes"
+//     | "Colors"
+//     | "Elevated"
+//     | "Rounded"
+//     | "Elevated Rounded"
+//     | "Outline"
+//     | "Soft Colors";
+//   children: Text | string | ReactNode | ReactChild | ReactChildren;
+// }
 // const nav: Record<CLASS, PageInfo> = {
 //   classname: { color: "btn-dark", round: "btn-rounded-success" },
 // };
+// enum ButtonStype {
+//   "Sizes",
+//   "Colors",
+//   "Elevated",
+//   "Rounded",
+//   "ElevatedRounded",
+//   "Outline",
+//   "SoftColors",
+// }
+// type ButtonProps =
+//   | "Sizes"
+//   | "Colors"
+//   | "Elevated"
+//   | "Rounded"
+//   | "ElevatedRounded"
+//   | "Outline"
+//   | "SoftColors";
 
 type ButtonInfo = {
+  size?: ButtonSizes;
   color?: ButtonColors;
+  elevated?: ButtonElevated;
   round?: ButtonRounded;
+  elevatedrounded?: ButtonElevatedRounded;
 };
 
 // interface ButtonFilledProps {}

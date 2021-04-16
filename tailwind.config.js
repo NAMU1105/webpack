@@ -3,12 +3,15 @@ const plugin = require("tailwindcss/plugin");
 const primaryColors = require("@left4code/tw-starter/dist/js/colors");
 
 module.exports = {
-  purge: [
-    "./dist/*.html",
-    "./src/components/**/*.{js,jsx,ts,tsx}",
-    "./src/pages/**/*.{js,jsx,ts,tsx}",
-    "./src/app.tsx",
-  ],
+  purge: {
+    enabled: true,
+    content: [
+      "./dist/*.html",
+      "./src/components/**/*.{js,jsx,ts,tsx}",
+      "./src/pages/**/*.{js,jsx,ts,tsx}",
+      "./src/app.tsx",
+    ],
+  },
   darkMode: "class",
   theme: {
     extend: {

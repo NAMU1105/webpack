@@ -23,7 +23,7 @@ import {
 
 import { Toggle } from "../components/form/input";
 import * as CHART_DATA from "../../src/utils/chartsDummyData";
-import Button2, { ButtonRounded } from "../components/form/button2";
+import Button2 from "../components/form/button2";
 
 // mount여부를 알려주는 변수
 let mounted = false;

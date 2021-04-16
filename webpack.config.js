@@ -66,12 +66,12 @@ module.exports = {
           plugins: ["@babel/plugin-syntax-dynamic-import"],
         },
       },
-      // hot-loader적용
-      {
-        test: /\.(js|jsx|ts|tsx)$/,
-        use: "react-hot-loader/webpack",
-        include: /node_modules/,
-      },
+      // // hot-loader적용
+      // {
+      //   test: /\.(js|jsx|ts|tsx)$/,
+      //   use: "react-hot-loader/webpack",
+      //   include: /node_modules/,
+      // },
       {
         // html loader
         test: /\.html$/,
@@ -94,42 +94,37 @@ module.exports = {
         },
         //  use: ["file-loader"],
       },
+      //css, sass
       {
         test: /\.(css|scss|sass)$/,
         use: [
-          //MiniCssExtractPlugin.loader,
-          {
-            loader: "style-loader",
-          },
-          {
-            loader: "css-loader",
-          },
-          {
-            loader: "postcss-loader", // postcss loader needed for tailwindcss
-            options: {
-              postcssOptions: {
-                ident: "postcss",
-                // plugins: [tailwindcss, autoprefixer],
-              },
-            },
-          },
-          {
-            loader: "sass-loader",
-          },
+          MiniCssExtractPlugin.loader,
+          "css-loader",
+          "postcss-loader",
+          "sass-loader",
         ],
+
+        // use: [
+        //   {
+        //     loader: "style-loader",
+        //   },
+        //   {
+        //     loader: "css-loader",
+        //   },
+        //   {
+        //     loader: "postcss-loader", // postcss loader needed for tailwindcss
+        //     options: {
+        //       postcssOptions: {
+        //         ident: "postcss",
+        //         // plugins: [tailwindcss, autoprefixer],
+        //       },
+        //     },
+        //   },
+        //   {
+        //     loader: "sass-loader",
+        //   },
+        // ],
       },
-      // {
-      //   test: /\.scss$/,
-      //   use: MiniCssExtractPlugin.extract({
-      //     fallback: "style-loader",
-      //     use: [
-      //       "css-loader",
-      //       "postcss-loader",
-      //       "resolve-url-loader",
-      //       "sass-loader",
-      //     ],
-      //   }),
-      // },
     ],
   },
   // 플러그인
