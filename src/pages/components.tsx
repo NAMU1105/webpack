@@ -23,6 +23,7 @@ import {
 
 import { Toggle } from "../components/form/input";
 import * as CHART_DATA from "../../src/utils/chartsDummyData";
+import Button2, { ButtonRounded } from "../components/form/button2";
 
 // mount여부를 알려주는 변수
 let mounted = false;
@@ -63,6 +64,10 @@ const Components: React.FC<IF> = (props: IF) => {
 
   return (
     <section>
+      {/* <Button2 cn={color:""}>test</Button2> */}
+      {/* <Button2 variant={cn:{color:""}}>test</Button2> */}
+      {/* <Button2 variant={cn:{color:"test", round: "test"}}>test</Button2> */}
+      <Button2 color="btn-dark">test</Button2>
       <DatePicker
         selected={startDate}
         onChange={(date: Date) => setStartDate(date)}

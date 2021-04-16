@@ -19,5 +19,6 @@ module.exports = {
     "no-empty-source": null,
     "declaration-empty-line-before": null,
     "length-zero-no-unit": null,
+    "rule-empty-line-before": null,
   },
 };

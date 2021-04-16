@@ -1,6 +1,6 @@
 import React, { ReactChildren } from "react";
 import { classNames } from "../../utils/utils";
-
+// 이 방법의 장점: 폰트사이즈나 배경같은 속성들을 컴포넌트에 반복해서 쓸 수 있다.
 import {
   TEXT_TRANSFORM_VARIANT_MAPS,
   COLOR_VARIANT_MAPS,
