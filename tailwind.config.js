@@ -223,6 +223,10 @@ module.exports = {
         1: "1px",
       },
 
+      //   gridColumn: {
+      //     "span-3": "span 3 / span 3",
+      //   },
+
       // inset: (theme, { negative }) => ({
       // }),
     },

@@ -16,6 +16,7 @@ import { Redirect } from "react-router-dom";
 import Auth from "../pages/auth";
 import Components from "../pages/components";
 import Users from "../pages/users";
+import Mypage from "../pages/mypage";
 //import ConfirmEmail from "../pages/confirmEmail";
 //import NewPassword from "../pages/newPassword";
 //import Settings from "../pages/setting";
@@ -37,7 +38,7 @@ const authRoutes = [
   { path: ["/login", "/signup", "/password", "/confirm"], component: Auth },
   { path: "/components", component: Components },
   { path: "/users", component: Users },
-  // { path: "/auth", component: Auth },
+  { path: "/mypage", component: Mypage },
   // { path: "/confirmEmail", component: ConfirmEmail },
   // { path: "/password", component: NewPassword },
   // { path: "/settings", component: Settings },

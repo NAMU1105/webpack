@@ -5,10 +5,10 @@ export const DropdownDepthedList = styled.li.attrs({
   className: "rounded-sm relative px-3 py-1 hover:bg-gray-100",
 })`
   & > ul {
-    transform: translatex(100%) scale(0);
+    transform: translateX(100%) scale(0);
   }
   &:hover > ul {
-    transform: translatex(101%) scale(1);
+    transform: translateX(101%) scale(1);
   }
   & > button svg {
     transform: rotate(-90deg);

@@ -223,7 +223,7 @@ interface IF {}
 
 const Header: React.FC<IF> = (props: IF) => {
   return (
-    <header className="sticky top-0 z-10 px-6 bg-black shadow-2xl w-full h-header flex justify-between items-center">
+    <header className="sticky top-0 z-50 px-6 bg-black shadow-2xl w-full h-header flex justify-between items-center">
       <Logo withLink type="LogoHorizontalDark" />
 
       {/* 기타 메뉴 */}

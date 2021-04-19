@@ -1,6 +1,7 @@
 // TODO: 아래 정보들(색상, 툴팁 사용여부 등을 프롭스로 받아서 넘기기)
 // 근데 아래 있는 애들 내가 정의할 필요 없음, 이미 다 정의 되어있으므로 그냥 가져다가 쓰면 됨...
 // <Chart.ChartData> 이 타입 쓰면 됨
+
 type BubbleDataType = {
   x: number;
   y: number;
@@ -24,6 +25,19 @@ interface ChartOptionsProps {
   maintainAspectRatio?: boolean;
   labelfontSize?: number;
 }
+
+export const LINE_DATA = {
+  labels: ["1", "2", "3", "4", "5", "6"],
+  datasets: [
+    {
+      label: "# of Sales",
+      data: [3, 5, 2, 3, 12, 19],
+      fill: false,
+      backgroundColor: "rgb(255, 99, 132)",
+      borderColor: "rgba(255, 99, 132, 0.2)",
+    },
+  ],
+};
 
 export const BUBBLE_DATA = {
   labels: ["a", "b", "c"],

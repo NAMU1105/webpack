@@ -18,11 +18,11 @@ const User: React.FC<UserProps> = (props: UserProps) => {
   };
 
   return (
-    <div className="box intro-y col-span-12 md:col-span-6">
+    <div className="box intro-y col-span-12 md:col-span-3">
       <div className="flex flex-col lg:flex-row items-center p-5 border-b border-gray-200 dark:border-dark-5">
         <div className="w-24 h-24 lg:w-12 lg:h-12 image-fit lg:mr-1">
           <img
-            alt="Icewall Tailwind HTML Admin Template"
+            alt="profile image"
             className="rounded-full"
             src={props.profile}
           />

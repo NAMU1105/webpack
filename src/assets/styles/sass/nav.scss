@@ -1,0 +1,7 @@
+.nav {
+  @apply flex;
+}
+
+.nav.nav-tabs .active {
+  @apply border-b-2 border-primary-1 font-medium;
+}
