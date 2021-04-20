@@ -1,9 +1,13 @@
 import React, { useState, useEffect, ReactNode } from "react";
 import { useLocation, NavLink } from "react-router-dom";
+import { useDispatch } from "react-redux";
+
 import { Formik, Form } from "formik";
 import { useTranslation } from "react-i18next";
 import ReCAPTCHA from "react-google-recaptcha";
 import styled from "styled-components";
+
+import { authActions } from "../store/auth";
 
 import {
   SignupSchema,
@@ -38,6 +42,8 @@ type AuthPaths =
 interface IF {}
 
 const Auth: React.FC<IF> = (props: IF) => {
+  const dispatch = useDispatch();
+
   // url파싱해서 어떤 로그인 모드인지 확인하여 엘레멘트를 반환
   // const history = useHistory();
   const location = useLocation();
@@ -236,7 +242,7 @@ const Auth: React.FC<IF> = (props: IF) => {
               setTimeout(() => {
                 alert(JSON.stringify(values, null, 2));
                 setSubmitting(false);
-
+                dispatch(authActions.login());
                 /**
                  TODO: 
                  1. 회원가입: 성공 시 이메일 인증 페이지

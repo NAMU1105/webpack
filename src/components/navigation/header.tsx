@@ -31,6 +31,7 @@ const HeaderMenuItems: React.FC<HeaderMenuItemsProps> = (
     <>
       {/* 1. alarm */}
       <DropDown2
+        align="right"
         label={
           <svg
             className={classNames`${
@@ -123,6 +124,7 @@ const HeaderMenuItems: React.FC<HeaderMenuItemsProps> = (
 
       {/* 2. language setting */}
       <DropDown2
+        align="right"
         label={
           <svg
             className={classNames`${
@@ -169,6 +171,7 @@ const HeaderMenuItems: React.FC<HeaderMenuItemsProps> = (
 
       {/* 3. setting */}
       <DropDown2
+        align="right"
         label={
           <svg
             className={classNames`${
@@ -201,6 +204,7 @@ const HeaderMenuItems: React.FC<HeaderMenuItemsProps> = (
       {/* 4. profile(my menu) */}
       {/* TODO: context-api에 유저 사진 정보 담아놓고 여기에 넘겨줘야 한다. */}
       <DropDown2
+        align="right"
         label={
           <Avatar
             customstyle={`${!props.sub && `hidden md:block`}`}

@@ -32,3 +32,7 @@
     }
   }
 }
+
+.not-box {
+  @apply bg-red-500 border-transparent rounded-none dark:bg-transparent shadow-none;
+}

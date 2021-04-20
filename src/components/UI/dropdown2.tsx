@@ -1,5 +1,6 @@
 import React, { ReactChild, ReactNode, ReactChildren } from "react";
 import styled from "styled-components";
+import { classNames } from "../../utils/utils";
 
 export const DropdownDepthedList = styled.li.attrs({
   className: "rounded-sm relative px-3 py-1 hover:bg-gray-100",
@@ -19,7 +20,7 @@ export const DropdownDepthedList = styled.li.attrs({
 `;
 
 interface DropdownListProps {
-  label?: string;
+  label?: string | ReactNode | ReactChild | ReactChildren;
   underline?: boolean;
   children?: ReactNode | ReactChild | ReactChildren;
 }
@@ -28,7 +29,7 @@ export const DropdownList: React.FC<DropdownListProps> = (
   props: DropdownListProps
 ) => {
   return (
-    <li className="cursor-pointer rounded-sm px-3 py-1 hover:bg-gray-100">
+    <li className="whitespace-pre cursor-pointer rounded-sm px-3 py-1 hover:bg-gray-100">
       {props.label ? props.label : props.children}
     </li>
   );
@@ -37,6 +38,7 @@ export const DropdownList: React.FC<DropdownListProps> = (
 interface DropDownProps {
   label?: ReactNode | string;
   children?: ReactNode | ReactChild | ReactChildren;
+  align?: "right" | "left";
 }
 
 const DropDown2: React.FC<DropDownProps> = (props: DropDownProps) => {
@@ -45,7 +47,11 @@ const DropDown2: React.FC<DropDownProps> = (props: DropDownProps) => {
       <button className="pl-3 outline-none focus:outline-none flex items-center">
         <span className="font-semibold flex-1">{props.label}</span>
       </button>
-      <ul className="mt-2 bg-white border rounded-sm transform scale-0 group-hover:scale-100 absolute transition duration-150 ease-in-out origin-top min-w-32">
+      <ul
+        className={classNames`${
+          props.align === "right" ? ` right-0` : ` left-0`
+        }  absolute mt-2 bg-white border rounded-sm transform scale-0 group-hover:scale-100 transition duration-150 ease-in-out origin-top min-w-32`}
+      >
         {props.children}
       </ul>
     </div>

@@ -1,5 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom";
+import { Provider } from "react-redux";
+
 import App from "./app";
 import {
   ApolloClient,
@@ -9,6 +11,7 @@ import {
 } from "@apollo/client";
 import { onError } from "@apollo/client/link/error";
 import "./i18n";
+import store from "./store/index";
 
 import "./app.css";
 // import "./index.scss";
@@ -37,8 +40,10 @@ const client = new ApolloClient({
 });
 
 ReactDOM.render(
-  <ApolloProvider client={client}>
-    <App />
-  </ApolloProvider>,
+  <Provider store={store}>
+    <ApolloProvider client={client}>
+      <App />
+    </ApolloProvider>
+  </Provider>,
   document.getElementById("root")
 );

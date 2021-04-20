@@ -1,18 +1,19 @@
 import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+// import { Link } from "react-router-dom";
+// import styled from "styled-components";
+// import tw from "twin.macro";
+import { Formik, Form } from "formik";
 
-import Chart from "chart.js";
+// import Chart from "chart.js";
 import * as chartjs from "react-chartjs-2";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import {
-  UncontrolledDropdown,
-  DropdownToggle,
-  DropdownMenu,
-  DropdownItem,
-} from "reactstrap";
-
-import { DropdownDepthedList, DropdownList } from "../components/UI/dropdown2";
+// import {
+//   UncontrolledDropdown,
+//   DropdownToggle,
+//   DropdownMenu,
+//   DropdownItem,
+// } from "reactstrap";
 
 import {
   faCamera,
@@ -20,6 +21,7 @@ import {
   faFile,
   faPlus,
   faCog,
+  faEllipsisV,
 } from "@fortawesome/free-solid-svg-icons";
 import { faInstagram, faTwitter } from "@fortawesome/free-brands-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -27,14 +29,76 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import defaultProfileImage from "../../public/images/preview-12.jpg";
 import * as CHART_DATA from "../../src/utils/chartsDummyData";
 import Button2 from "../components/form/button2";
+import DropDown2, {
+  DropdownDepthedList,
+  DropdownList,
+} from "../components/UI/dropdown2";
+import { Toggle } from "../components/form/input";
+import ProgressBar from "../components/UI/progressBar";
+
+import { classNames } from "../utils/utils";
 
 interface IF {}
+
+type ViewpagerType = "main" | "latestWork" | "inProgressWork";
+
+type MainViewPager =
+  | "mypage_dashboard"
+  | "mypage_account"
+  | "mypage_activities"
+  | "mypage_tasks";
+
+type LatestWorkViewPager = "mypage_latest_new" | "mypage_latest_lastWeek";
+type InProgressWorkViewPager =
+  | "mypage_progress_new"
+  | "mypage_progress_lastWeek";
 
 const Mypage: React.FC<IF> = (props: IF) => {
   // TODO: 나중에는 유저 프로필 사진을 initial state로 넣기
   const [profileImg, setProfileImg] = useState<string>(defaultProfileImage);
-  const [dropdownOpen, setDropdownOpen] = useState(false);
-  const toggle = () => setDropdownOpen((prevState) => !prevState);
+
+  // TODO: 이 state에 따라서 보여주는 컴포넌트 다르게 하기
+  const [mainViewPager, setMainViewPager] = useState<MainViewPager>(
+    "mypage_dashboard"
+  );
+  const [
+    lastestWorkViewPager,
+    setLastestWorkViewPager,
+  ] = useState<LatestWorkViewPager>("mypage_latest_new");
+  const [
+    inProgressWorkViewPager,
+    setInProgressWorkViewPager,
+  ] = useState<InProgressWorkViewPager>("mypage_progress_new");
+
+  const setViewPagerHandler = (
+    id: MainViewPager | LatestWorkViewPager | InProgressWorkViewPager,
+    type: ViewpagerType
+  ) => {
+    let viewPager;
+
+    switch (type) {
+      case "latestWork":
+        viewPager = document.querySelectorAll(".mypage_viewpager--latest");
+        setLastestWorkViewPager(id as typeof lastestWorkViewPager);
+        break;
+
+      case "inProgressWork":
+        viewPager = document.querySelectorAll(".mypage_viewpager--progress");
+        setInProgressWorkViewPager(id as typeof inProgressWorkViewPager);
+        break;
+
+      default:
+        viewPager = document.querySelectorAll(".mypage_viewpager--main");
+        setMainViewPager(id as typeof mainViewPager);
+        break;
+    }
+
+    for (let i = 0; i < viewPager.length; i++) {
+      viewPager[i].classList.remove("active");
+    }
+
+    document.querySelector(`#${id}`).classList.add("active");
+  };
 
   const fileOnChangeHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
     document.querySelector("#profile_img").classList.add("fade-in");
@@ -90,7 +154,7 @@ const Mypage: React.FC<IF> = (props: IF) => {
               />
               <label
                 htmlFor="profileImg_input"
-                className=" cursor-pointer bg-primary-1 absolute mb-1 mr-1 flex items-center justify-center bottom-0 right-0 bg-theme-17 rounded-full p-2"
+                className=" cursor-pointer absolute mb-1 mr-1 flex items-center justify-center bottom-0 right-0 bg-theme-17 rounded-full p-2"
               >
                 <input
                   id="profileImg_input"
@@ -171,56 +235,60 @@ const Mypage: React.FC<IF> = (props: IF) => {
           className="nav nav-tabs flex-col sm:flex-row justify-center lg:justify-start"
           role="tablist"
         >
-          <a
-            id="dashboard-tab"
-            data-toggle="tab"
-            data-target="#dashboard"
-            href="/"
-            className="py-4 sm:mr-8 active"
+          <span
+            id="mypage_dashboard"
+            // href="/"
+            className="mypage_viewpager--main cursor-pointer py-4 sm:mr-8 active"
             role="tab"
-            aria-controls="dashboard"
-            aria-selected="true"
+            aria-selected="false"
+            onClick={() => {
+              setViewPagerHandler("mypage_dashboard", "main");
+            }}
           >
             Dashboard
-          </a>
-          <a
-            id="account-and-profile-tab"
-            data-toggle="tab"
-            data-target="#account-and-profile"
-            href="/"
-            className="py-4 sm:mr-8"
+          </span>
+          <span
+            id="mypage_account"
+            // href="/"
+            className="mypage_viewpager--main cursor-pointer py-4 sm:mr-8 "
             role="tab"
             aria-selected="false"
+            onClick={() => {
+              setViewPagerHandler("mypage_account", "main");
+            }}
           >
             Account & Profile
-          </a>
-          <a
-            id="activities-tab"
-            data-toggle="tab"
-            data-target="#activities"
-            href="/"
-            className="py-4 sm:mr-8"
+          </span>
+          <span
+            id="mypage_activities"
+            // href="/"
+            className="mypage_viewpager--main cursor-pointer py-4 sm:mr-8"
             role="tab"
             aria-selected="false"
+            onClick={() => {
+              setViewPagerHandler("mypage_activities", "main");
+            }}
           >
             Activities
-          </a>
-          <a
-            id="tasks-tab"
-            data-toggle="tab"
-            data-target="#tasks"
-            href="/"
-            className="py-4 sm:mr-8"
+          </span>
+          <span
+            id="mypage_tasks"
+            // href="/"
+            className="mypage_viewpager--main cursor-pointer py-4 sm:mr-8"
             role="tab"
             aria-selected="false"
+            onClick={() => {
+              setViewPagerHandler("mypage_tasks", "main");
+            }}
           >
             Tasks
-          </a>
+          </span>
         </div>
       </div>
 
       {/* profile info ends */}
       <div className="intro-y tab-content mt-5">
+        {/* DASHBOARD starts */}
         <div
           id="dashboard"
           className="tab-pane active"
@@ -234,7 +302,32 @@ const Mypage: React.FC<IF> = (props: IF) => {
                 <h2 className="font-medium text-base mr-auto">
                   Top Categories
                 </h2>
-                <div className="dropdown ml-auto">
+
+                <DropDown2
+                  label={<FontAwesomeIcon icon={faEllipsisV} />}
+                  align="right"
+                >
+                  <DropdownList>
+                    <a
+                      href=""
+                      className="flex items-center dark:bg-dark-1 dark:hover:bg-dark-2"
+                    >
+                      <FontAwesomeIcon icon={faPlus} /> Add Category
+                    </a>
+                  </DropdownList>
+
+                  <DropdownList>
+                    <a
+                      href=""
+                      className="flex items-center dark:bg-dark-1 dark:hover:bg-dark-2"
+                    >
+                      <FontAwesomeIcon icon={faCog} />
+                      Settings
+                    </a>
+                  </DropdownList>
+                </DropDown2>
+
+                {/* <div className="dropdown ml-auto">
                   <a
                     className="dropdown-toggle w-5 h-5 block"
                     href="/"
@@ -262,7 +355,7 @@ const Mypage: React.FC<IF> = (props: IF) => {
                       </a>
                     </div>
                   </div>
-                </div>
+                </div> */}
               </div>
               <div className="p-5">
                 <div className="flex flex-col sm:flex-row">
@@ -343,7 +436,9 @@ const Mypage: React.FC<IF> = (props: IF) => {
                 <h2 className="font-medium text-base mr-auto">
                   Work In Progress
                 </h2>
-                <div className="dropdown ml-auto sm:hidden">
+
+                {/* 모바일 용 */}
+                {/* <div className="dropdown ml-auto sm:hidden">
                   <a
                     className="dropdown-toggle w-5 h-5 block"
                     href="/"
@@ -354,63 +449,56 @@ const Mypage: React.FC<IF> = (props: IF) => {
                       className="w-5 h-5 text-gray-600 dark:text-gray-300"
                     ></i>
                   </a>
-                  <div
-                    className="nav nav-tabs dropdown-menu w-40"
-                    role="tablist"
-                  >
+                  <div className="nav nav-tabs dropdown-menu" role="tablist">
                     <div className="dropdown-menu__content box dark:bg-dark-1 p-2">
-                      <a
+                      <span
                         id="work-in-progress-new-tab"
-                        href="/"
-                        data-toggle="tab"
-                        data-target="#work-in-progress-new"
                         className="block p-2 transition duration-300 ease-in-out bg-white dark:bg-dark-1 hover:bg-gray-200 dark:hover:bg-dark-2 rounded-md"
                         role="tab"
-                        aria-controls="work-in-progress-new"
-                        aria-selected="true"
                       >
-                        New
-                      </a>
-                      <a
+                        New 1
+                      </span>
+                      <span
                         id="work-in-progress-last-week-tab"
-                        href="/"
-                        data-toggle="tab"
-                        data-target="#work-in-progress-last-week"
                         className="block p-2 transition duration-300 ease-in-out bg-white dark:bg-dark-1 hover:bg-gray-200 dark:hover:bg-dark-2 rounded-md"
                         role="tab"
-                        aria-selected="false"
                       >
                         Last Week
-                      </a>
+                      </span>
                     </div>
                   </div>
-                </div>
+                </div> */}
+
                 <div
-                  className="nav nav-tabs ml-auto hidden sm:flex"
+                  className="nav nav-tabs ml-auto flex flex-col shadow-lg sm:shadow-none sm:rounded-none sm:flex-row"
                   role="tablist"
                 >
-                  <a
-                    id="work-in-progress-mobile-new-tab"
-                    data-toggle="tab"
-                    data-target="#work-in-progress-new"
-                    href="/"
-                    className="py-5 ml-6 active"
+                  <span
+                    id="mypage_progress_new"
+                    className="mypage_viewpager--progress cursor-pointer p-2 sm:px-0 sm:py-5 sm:ml-6 active  dark:bg-dark-1 hover:bg-gray-200 sm:hover:bg-transparent"
                     role="tab"
-                    aria-selected="true"
+                    onClick={() => {
+                      setViewPagerHandler(
+                        "mypage_progress_new",
+                        "inProgressWork"
+                      );
+                    }}
                   >
                     New
-                  </a>
-                  <a
-                    id="week-work-in-progress-mobile-last-week-tab"
-                    data-toggle="tab"
-                    data-target="#work-in-progress-last-week"
-                    href="/"
-                    className="py-5 ml-6"
+                  </span>
+                  <span
+                    id="mypage_progress_lastWeek"
+                    className="mypage_viewpager--progress cursor-pointer p-2 sm:px-0 sm:py-5 sm:ml-6  dark:bg-dark-1 hover:bg-gray-200 sm:hover:bg-transparent"
                     role="tab"
-                    aria-selected="false"
+                    onClick={() => {
+                      setViewPagerHandler(
+                        "mypage_progress_lastWeek",
+                        "inProgressWork"
+                      );
+                    }}
                   >
                     Last Week
-                  </a>
+                  </span>
                 </div>
               </div>
               <div className="p-5">
@@ -421,41 +509,26 @@ const Mypage: React.FC<IF> = (props: IF) => {
                     role="tabpanel"
                     aria-labelledby="work-in-progress-new-tab"
                   >
-                    <div>
+                    <div className="w-full">
                       <div className="flex">
                         <div className="mr-auto">Pending Tasks</div>
                         <div>20%</div>
                       </div>
-                      <div className="progress h-1 mt-2">
-                        <div
-                          className="progress-bar w-1/2 bg-theme-17"
-                          role="progressbar"
-                        ></div>
-                      </div>
+                      <ProgressBar progress={20} />
                     </div>
                     <div className="mt-5">
                       <div className="flex">
                         <div className="mr-auto">Completed Tasks</div>
                         <div>2 / 20</div>
                       </div>
-                      <div className="progress h-1 mt-2">
-                        <div
-                          className="progress-bar w-1/4 bg-theme-17"
-                          role="progressbar"
-                        ></div>
-                      </div>
+                      <ProgressBar progress={100} />
                     </div>
                     <div className="mt-5">
                       <div className="flex">
                         <div className="mr-auto">Tasks In Progress</div>
                         <div>42</div>
                       </div>
-                      <div className="progress h-1 mt-2">
-                        <div
-                          className="progress-bar w-3/4 bg-theme-17"
-                          role="progressbar"
-                        ></div>
-                      </div>
+                      <ProgressBar progress={80} />
                     </div>
                     <div className="w-full flex justify-center mt-5">
                       <Button2 color="btn-secondary">view more details</Button2>
@@ -568,7 +641,7 @@ const Mypage: React.FC<IF> = (props: IF) => {
             <div className="intro-y box col-span-12 lg:col-span-6">
               <div className="flex items-center px-5 py-5 sm:py-0 border-b border-gray-200 dark:border-dark-5">
                 <h2 className="font-medium text-base mr-auto">Latest Tasks</h2>
-                <div className="dropdown ml-auto sm:hidden">
+                {/* <div className="dropdown ml-auto sm:hidden">
                   <a
                     className="dropdown-toggle w-5 h-5 block"
                     href="/"
@@ -584,58 +657,50 @@ const Mypage: React.FC<IF> = (props: IF) => {
                     role="tablist"
                   >
                     <div className="dropdown-menu__content box dark:bg-dark-1 p-2">
-                      <a
+                      <span
                         id="latest-tasks-new-tab"
-                        href="/"
-                        data-toggle="tab"
-                        data-target="#latest-tasks-new"
                         className="block p-2 transition duration-300 ease-in-out bg-white dark:bg-dark-1 hover:bg-gray-200 dark:hover:bg-dark-2 rounded-md"
                         role="tab"
-                        aria-controls="latest-tasks-new"
-                        aria-selected="true"
                       >
-                        New
-                      </a>
-                      <a
+                        New 3
+                      </span>
+                      <span
                         id="latest-tasks-last-week-tab"
-                        href="/"
-                        data-toggle="tab"
-                        data-target="#latest-tasks-last-week"
                         className="block p-2 transition duration-300 ease-in-out bg-white dark:bg-dark-1 hover:bg-gray-200 dark:hover:bg-dark-2 rounded-md"
                         role="tab"
-                        aria-selected="false"
                       >
                         Last Week
-                      </a>
+                      </span>
                     </div>
                   </div>
-                </div>
+                </div> */}
                 <div
-                  className="nav nav-tabs ml-auto hidden sm:flex"
+                  className="nav nav-tabs ml-auto flex flex-col shadow-lg sm:shadow-none sm:rounded-none sm:flex-row"
                   role="tablist"
                 >
-                  <a
-                    id="latest-tasks-mobile-new-tab"
-                    data-toggle="tab"
-                    data-target="#latest-tasks-new"
-                    href="/"
-                    className="py-5 ml-6 active"
+                  <span
+                    id="mypage_latest_new"
+                    className="mypage_viewpager--latest cursor-pointer p-2 sm:px-0 sm:py-5 sm:ml-6 active  dark:bg-dark-1 hover:bg-gray-200 sm:hover:bg-transparent"
                     role="tab"
-                    aria-selected="true"
+                    onClick={() => {
+                      setViewPagerHandler("mypage_latest_new", "latestWork");
+                    }}
                   >
                     New
-                  </a>
-                  <a
-                    id="latest-tasks-mobile-last-week-tab"
-                    data-toggle="tab"
-                    data-target="#latest-tasks-last-week"
-                    href="/"
-                    className="py-5 ml-6"
+                  </span>
+                  <span
+                    id="mypage_latest_lastWeek"
+                    className="mypage_viewpager--latest cursor-pointer p-2 sm:px-0 sm:py-5 sm:ml-6  dark:bg-dark-1 hover:bg-gray-200 sm:hover:bg-transparent"
                     role="tab"
-                    aria-selected="false"
+                    onClick={() => {
+                      setViewPagerHandler(
+                        "mypage_latest_lastWeek",
+                        "latestWork"
+                      );
+                    }}
                   >
                     Last Week
-                  </a>
+                  </span>
                 </div>
               </div>
               <div className="p-5">
@@ -654,10 +719,36 @@ const Mypage: React.FC<IF> = (props: IF) => {
                         <div className="text-gray-600">10:00 AM</div>
                       </div>
 
-                      <input
-                        className="form-check-switch ml-auto"
-                        type="checkbox"
-                      />
+                      <Formik
+                        initialValues={{
+                          toggle: false,
+                        }}
+                        validationSchema={null}
+                        onSubmit={(values, { setSubmitting }) => {
+                          setTimeout(() => {
+                            alert(JSON.stringify(values, null, 2));
+                            setSubmitting(false);
+                          }, 300);
+                        }}
+                      >
+                        {({
+                          errors,
+                          touched,
+                          values,
+                          handleSubmit,
+                          isSubmitting,
+                        }) => (
+                          <Form className="ml-auto" onSubmit={handleSubmit}>
+                            <Toggle
+                              label="toggle"
+                              name="toggle"
+                              off=" "
+                              on=" "
+                              // oncolor="yellow"
+                            />
+                          </Form>
+                        )}
+                      </Formik>
                     </div>
                     <div className="flex items-center mt-5">
                       <div className="border-l-2 border-theme-17 dark:border-theme-26 pl-4">
@@ -666,10 +757,36 @@ const Mypage: React.FC<IF> = (props: IF) => {
                         </a>
                         <div className="text-gray-600">02:00 PM</div>
                       </div>
-                      <input
-                        className="form-check-switch ml-auto"
-                        type="checkbox"
-                      />
+                      <Formik
+                        initialValues={{
+                          toggle: false,
+                        }}
+                        validationSchema={null}
+                        onSubmit={(values, { setSubmitting }) => {
+                          setTimeout(() => {
+                            alert(JSON.stringify(values, null, 2));
+                            setSubmitting(false);
+                          }, 300);
+                        }}
+                      >
+                        {({
+                          errors,
+                          touched,
+                          values,
+                          handleSubmit,
+                          isSubmitting,
+                        }) => (
+                          <Form className="ml-auto" onSubmit={handleSubmit}>
+                            <Toggle
+                              label="toggle"
+                              name="toggle"
+                              off=" "
+                              on=" "
+                              // oncolor="yellow"
+                            />
+                          </Form>
+                        )}
+                      </Formik>
                     </div>
                     <div className="flex items-center mt-5">
                       <div className="border-l-2 border-theme-17 dark:border-theme-26 pl-4">
@@ -678,10 +795,36 @@ const Mypage: React.FC<IF> = (props: IF) => {
                         </a>
                         <div className="text-gray-600">04:00 PM</div>
                       </div>
-                      <input
-                        className="form-check-switch ml-auto"
-                        type="checkbox"
-                      />
+                      <Formik
+                        initialValues={{
+                          toggle: false,
+                        }}
+                        validationSchema={null}
+                        onSubmit={(values, { setSubmitting }) => {
+                          setTimeout(() => {
+                            alert(JSON.stringify(values, null, 2));
+                            setSubmitting(false);
+                          }, 300);
+                        }}
+                      >
+                        {({
+                          errors,
+                          touched,
+                          values,
+                          handleSubmit,
+                          isSubmitting,
+                        }) => (
+                          <Form className="ml-auto" onSubmit={handleSubmit}>
+                            <Toggle
+                              label="toggle"
+                              name="toggle"
+                              off=" "
+                              on=" "
+                              // oncolor="yellow"
+                            />
+                          </Form>
+                        )}
+                      </Formik>
                     </div>
                   </div>
                 </div>

@@ -95,11 +95,6 @@ const InputTextSearchBar = styled.div`
       display: block;
     }
   }
-
-  /* & > button > svg:focus-within { */
-  /* .searchIcon:focus-within {
-    transform: scaleX(0.7);
-  } */
 `;
 
 type InputTextWrapperProps = {
@@ -156,10 +151,8 @@ const SliderWrapper = styled.div`
     padding: 0;
     border-radius: 0; /* iOS */
     background: gainsboro;
-    overflow: hidden;
     cursor: pointer;
     -webkit-appearance: none;
-    /* height: 18px; */
     height: 10px;
   }
 
@@ -168,9 +161,8 @@ const SliderWrapper = styled.div`
     position: relative;
     z-index: 1;
     outline: 0;
-    //
 
-    -webkit-appearance: none;
+    /* -webkit-appearance: none; */
     width: 10px;
     height: 10px;
     background: #fff;
@@ -191,7 +183,7 @@ const SliderWrapper = styled.div`
     width: 9px;
   }
 
-  // slider 색상 나오는 곳
+  /* // slider 색상 나오는 곳 */
   input::-moz-range-track,
   input::-ms-track {
     position: relative;
@@ -199,6 +191,7 @@ const SliderWrapper = styled.div`
     background-color: transparent;
     border: 0;
   }
+
   /* input:last-of-type::-moz-range-track,
   input:last-of-type::-ms-track {
     -moz-appearance: none;
@@ -210,8 +203,6 @@ const SliderWrapper = styled.div`
     border: 0;
     outline: none;
   }
-
-  ////
 `;
 
 // 에러 메시지 출력 div
@@ -478,18 +469,28 @@ export const Checkbox: React.FC<CheckboxProps> = ({ children, ...props }) => {
 ////****************************** */
 
 const ToggleWrapper = styled.input.attrs((props: any) => ({
-  className: classNames`appearance-none transition-colors cursor-pointer w-14 h-7 rounded-full focus:outline-none bg-red-500`,
+  className: classNames`appearance-none transition-colors cursor-pointer w-14 h-7 rounded-full focus:outline-none`,
 }))<any>`
+  background-color: red;
+
   &:checked {
-    ${tw`bg-green-500`}
+    background-color: ${(props) => (props.oncolor ? props.oncolor : `blue`)};
   }
 
   &:checked ~ span:last-child {
+    background-color: ${(props) => props.offcolor};
     ${tw`translate-x-8`}
   }
 `;
 
-export const Toggle: React.FC<CheckboxProps> = ({ children, ...props }) => {
+interface ToggleProps extends CheckboxProps {
+  off?: "OFF" | string;
+  on?: "ON" | string;
+  oncolor?: string;
+  offcolor?: string;
+}
+
+export const Toggle: React.FC<ToggleProps> = ({ children, ...props }) => {
   const [field, meta] = useField({
     name: props.name,
   });
@@ -499,10 +500,10 @@ export const Toggle: React.FC<CheckboxProps> = ({ children, ...props }) => {
       <label className="flex items-center relative w-max cursor-pointer select-none">
         <ToggleWrapper type="checkbox" {...field} {...props} />
         <span className="absolute font-medium text-xs uppercase right-1 text-white">
-          OFF
+          {props.off ? props.off : "OFF"}
         </span>
         <span className="absolute font-medium text-xs uppercase right-8 text-white">
-          ON
+          {props.on ? props.on : "ON"}
         </span>
         <span className="w-7 h-7 right-8 absolute rounded-full transform transition-transform bg-gray-200"></span>
       </label>
